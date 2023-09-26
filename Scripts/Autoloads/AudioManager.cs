@@ -1,4 +1,4 @@
-namespace Template;
+namespace SpaceGame;
 
 // Members of this class were set to static because this will exist for the
 // duration of the applications life and there should be no issues with

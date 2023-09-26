@@ -1,4 +1,4 @@
-﻿namespace Template;
+﻿namespace SpaceGame;
 
 [AttributeUsage(AttributeTargets.Method)]
 public class ConsoleCommandAttribute : Attribute

@@ -1,4 +1,4 @@
-namespace Template;
+namespace SpaceGame;
 
 public partial class UIMainMenuNav : Node
 {
@@ -32,5 +32,5 @@ public partial class UIMainMenuNav : Node
     void _on_discord_pressed() =>
         OS.ShellOpen("https://discord.gg/866cg8yfxZ");
     void _on_github_pressed() =>
-        OS.ShellOpen("https://github.com/ValksGodotTools/Template");
+        OS.ShellOpen("https://github.com/ValksGodotTools/SpaceGame");
 }

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Template;
+namespace SpaceGame;
 
 public class ConsoleCommandInfo
 {

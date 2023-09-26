@@ -1,4 +1,4 @@
-namespace Template;
+namespace SpaceGame;
 
 using System.Globalization;
 using System.Reflection;

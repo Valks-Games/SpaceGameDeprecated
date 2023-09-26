@@ -1,4 +1,4 @@
-namespace Template;
+namespace SpaceGame;
 
 [GlobalClass]
 public partial class GameState : Resource

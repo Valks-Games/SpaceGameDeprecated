@@ -1,4 +1,4 @@
-﻿namespace Template;
+﻿namespace SpaceGame;
 
 public static class Music
 {
