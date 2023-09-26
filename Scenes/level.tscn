@@ -1,3 +1,7 @@
-[gd_scene format=3 uid="uid://dla50js744pis"]
+[gd_scene load_steps=2 format=3 uid="uid://dla50js744pis"]
+
+[ext_resource type="PackedScene" uid="uid://c7aujwxnkio66" path="res://Scenes/Prefabs/player_ship.tscn" id="1_wawxp"]
 
 [node name="Level" type="Node2D"]
+
+[node name="Player Ship" parent="." instance=ExtResource("1_wawxp")]
