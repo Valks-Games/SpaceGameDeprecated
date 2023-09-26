@@ -1,7 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://dla50js744pis"]
+[gd_scene load_steps=4 format=3 uid="uid://dla50js744pis"]
 
+[ext_resource type="Texture2D" uid="uid://ryi0lan1sxw6" path="res://Sprites/Space-Background-2.jpg" id="1_iqs5p"]
 [ext_resource type="PackedScene" uid="uid://c7aujwxnkio66" path="res://Scenes/Prefabs/player_ship.tscn" id="1_wawxp"]
+[ext_resource type="PackedScene" uid="uid://c6pism2kgjr5c" path="res://Scenes/Prefabs/UI/popup_menu.tscn" id="2_gbn3x"]
 
 [node name="Level" type="Node2D"]
 
 [node name="Player Ship" parent="." instance=ExtResource("1_wawxp")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UIPopupMenu" parent="CanvasLayer" instance=ExtResource("2_gbn3x")]
+visible = false
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+motion_mirroring = Vector2(1600, 1200)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("1_iqs5p")
