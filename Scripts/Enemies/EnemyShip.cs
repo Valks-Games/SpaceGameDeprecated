@@ -1,5 +1,4 @@
-using Godot;
-using System;
+namespace SpaceGame;
 
 public partial class EnemyShip : RigidBody2D
 {
