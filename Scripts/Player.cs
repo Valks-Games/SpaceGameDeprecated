@@ -1,30 +1,16 @@
 namespace SpaceGame;
 
-public partial class Player : RigidBody2D
+public partial class Player : Ship
 {
-    [Export] float thrustAcceleration = 2.0f;
-    [Export] float rotateAcceleration = 0.1f;
     [Export] PackedScene greenLaser;
 
-    List<GpuParticles2D> engineParticles = new();
-    List<Marker2D> gunFirePositions = new();
     float fireCooldown = 250;
     GTimer timerCooldown;
 
     public override void _Ready()
     {
+        base._Ready();
         timerCooldown = new(this, fireCooldown) { Loop = false };
-
-        foreach (GpuParticles2D particles in GetNode("Engine Particles").GetChildren())
-        {
-            particles.Emitting = false;
-            engineParticles.Add(particles);
-        }
-
-        foreach (Marker2D marker in GetNode("Guns").GetChildren())
-        {
-            gunFirePositions.Add(marker);
-        }
     }
 
     public override void _PhysicsProcess(double delta)
