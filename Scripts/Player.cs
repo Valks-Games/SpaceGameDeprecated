@@ -78,6 +78,7 @@ public partial class Player : RigidBody2D
         foreach (Marker2D marker in gunFirePositions)
         {
             Projectile laser = greenLaser.Instantiate<Projectile>();
+            laser.OwnerId = GetInstanceId();
             laser.Position = marker.GlobalPosition;
             laser.Rotation = Rotation;
             GetTree().Root.AddChild(laser);
