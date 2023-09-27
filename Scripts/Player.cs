@@ -4,20 +4,33 @@ public partial class Player : RigidBody2D
 {
     [Export] float thrustAcceleration = 2.0f;
     [Export] float rotateAcceleration = 0.1f;
+    [Export] PackedScene greenLaser;
 
     List<GpuParticles2D> engineParticles = new();
+    List<Marker2D> gunFirePositions = new();
+    float fireCooldown = 250;
+    GTimer timerCooldown;
 
     public override void _Ready()
     {
+        timerCooldown = new(this, fireCooldown) { Loop = false };
+
         foreach (GpuParticles2D particles in GetNode("Engine Particles").GetChildren())
         {
             particles.Emitting = false;
             engineParticles.Add(particles);
         }
+
+        foreach (Marker2D marker in GetNode("Guns").GetChildren())
+        { 
+            gunFirePositions.Add(marker);    
+        }
     }
 
     public override void _PhysicsProcess(double delta)
     {
+        Shoot();
+
         if (Input.IsActionPressed("move_left"))
         {
             AngularVelocity -= rotateAcceleration;
@@ -49,6 +62,22 @@ public partial class Player : RigidBody2D
                 x.Lifetime = 0.5f;
                 x.Emitting = false;
             });
+        }
+    }
+
+    void Shoot()
+    {
+        if (!Input.IsActionPressed("jump") || timerCooldown.IsActive())
+            return;
+
+        timerCooldown.Start();
+
+        foreach (Marker2D marker in gunFirePositions)
+        {
+            Projectile laser = greenLaser.Instantiate<Projectile>();
+            laser.Position = marker.GlobalPosition;
+            laser.Rotation = Rotation;
+            GetTree().Root.AddChild(laser);
         }
     }
 }

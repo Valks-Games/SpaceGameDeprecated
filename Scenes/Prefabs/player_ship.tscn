@@ -1,17 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7aujwxnkio66"]
+[gd_scene load_steps=11 format=3 uid="uid://c7aujwxnkio66"]
 
 [ext_resource type="Texture2D" uid="uid://c4wt4tbr0nrrg" path="res://Sprites/player_ship.png" id="1_133p8"]
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_cnppw"]
 [ext_resource type="PackedScene" uid="uid://dne2qghftgkgv" path="res://Scenes/Prefabs/engine_particles.tscn" id="2_xhrih"]
-[ext_resource type="Shader" path="res://shield.gdshader" id="4_2mfc2"]
+[ext_resource type="Shader" path="res://Shaders/2D/ship.gdshader" id="3_qoss6"]
+[ext_resource type="Shader" path="res://Shaders/2D/shield.gdshader" id="4_jb8ba"]
 [ext_resource type="Texture2D" uid="uid://c7wpof6c8ax53" path="res://Sprites/circle.png" id="4_torf4"]
+[ext_resource type="PackedScene" uid="uid://cj2l4pjic6ibr" path="res://Scenes/Prefabs/green_laser.tscn" id="7_0546s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjvs1"]
 size = Vector2(48, 40)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vrck"]
+shader = ExtResource("3_qoss6")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3nyym"]
-shader = ExtResource("4_2mfc2")
+shader = ExtResource("4_jb8ba")
 shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
+shader_parameter/intensity = null
 
 [node name="RigidBody2D" type="RigidBody2D"]
 gravity_scale = 0.0
@@ -20,6 +26,7 @@ angular_damp = 1.0
 script = ExtResource("1_cnppw")
 thrustAcceleration = 5.0
 rotateAcceleration = 0.2
+greenLaser = ExtResource("7_0546s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
@@ -35,9 +42,19 @@ position = Vector2(4, 17)
 [node name="Left" parent="Engine Particles" instance=ExtResource("2_xhrih")]
 position = Vector2(-4, 17)
 
+[node name="Guns" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Guns"]
+position = Vector2(-12, 0)
+
+[node name="Marker2D2" type="Marker2D" parent="Guns"]
+position = Vector2(12, 0)
+
 [node name="Ship" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_1vrck")
 texture = ExtResource("1_133p8")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Shield" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_3nyym")
+position = Vector2(0, 5)
 texture = ExtResource("4_torf4")
