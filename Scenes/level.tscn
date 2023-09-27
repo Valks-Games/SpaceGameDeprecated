@@ -35,5 +35,5 @@ material = SubResource("ShaderMaterial_hujyv")
 offset_right = 1000.0
 offset_bottom = 1000.0
 
-[node name="RigidBody2D" parent="." instance=ExtResource("4_hi16p")]
+[node name="Enemy Ship" parent="." instance=ExtResource("4_hi16p")]
 position = Vector2(333, 64)
