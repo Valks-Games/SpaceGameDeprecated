@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://4jvhnoaanoae"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/enemy_ship.cs" id="1_goopm"]
+[ext_resource type="Texture2D" path="res://Sprites/enemy_ship.png" id="1_x8fuu"]
+[ext_resource type="Shader" path="res://Shaders/2D/shield.gdshader" id="2_8bxnb"]
+[ext_resource type="Texture2D" uid="uid://c7wpof6c8ax53" path="res://Sprites/circle.png" id="3_mnd0r"]
+
+[sub_resource type="Gradient" id="Gradient_gtwqj"]
+offsets = PackedFloat32Array(0, 0.480132, 0.629139)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bmfw1"]
+gradient = SubResource("Gradient_gtwqj")
+
+[sub_resource type="Curve" id="Curve_vatgv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ne1ta"]
+curve = SubResource("Curve_vatgv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nt6ax"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 65, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 10.0
+damping_max = 30.0
+angle_min = -360.0
+angle_max = 360.0
+scale_min = 2.8
+scale_max = 2.8
+scale_curve = SubResource("CurveTexture_ne1ta")
+color_ramp = SubResource("GradientTexture1D_bmfw1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k1722"]
+shader = ExtResource("2_8bxnb")
+shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
+shader_parameter/size = 0.0
+shader_parameter/intensity = 0.0
+
+[node name="RigidBody2D" type="RigidBody2D"]
+gravity_scale = 0.0
+linear_damp = 1.0
+angular_damp = 1.0
+script = ExtResource("1_goopm")
+
+[node name="Engine Particles" type="Node2D" parent="."]
+rotation = 1.5708
+
+[node name="Center" type="GPUParticles2D" parent="Engine Particles"]
+position = Vector2(0, 10)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_nt6ax")
+local_coords = true
+
+[node name="Ship" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_x8fuu")
+
+[node name="Shield" type="Sprite2D" parent="." groups=["Enemies"]]
+material = SubResource("ShaderMaterial_k1722")
+position = Vector2(0, 1)
+texture = ExtResource("3_mnd0r")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+rotation = 1.5708
+polygon = PackedVector2Array(-2, -10, 2, -10, 12, 0, 12, 4, 10, 6, 2, 10, -2, 10, -10, 6, -12, 4, -12, 0, -10, -2)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dla50js744pis"]
+[gd_scene load_steps=6 format=3 uid="uid://dla50js744pis"]
 
 [ext_resource type="Shader" path="res://Shaders/2D/stars.gdshader" id="1_axaq7"]
 [ext_resource type="PackedScene" uid="uid://c7aujwxnkio66" path="res://Scenes/Prefabs/player_ship.tscn" id="1_wawxp"]
 [ext_resource type="PackedScene" uid="uid://c6pism2kgjr5c" path="res://Scenes/Prefabs/UI/popup_menu.tscn" id="2_gbn3x"]
+[ext_resource type="PackedScene" uid="uid://4jvhnoaanoae" path="res://Scenes/Prefabs/Enemies/enemy_ship.tscn" id="4_hi16p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hujyv"]
 shader = ExtResource("1_axaq7")
@@ -16,7 +17,7 @@ offset_top = 226.0
 offset_right = 706.0
 offset_bottom = 266.0
 
-[node name="Player Ship" parent="." instance=ExtResource("1_wawxp")]
+[node name="Player Ship" parent="." groups=["Player"] instance=ExtResource("1_wawxp")]
 position = Vector2(554, 361)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -33,3 +34,6 @@ motion_mirroring = Vector2(1000, 1000)
 material = SubResource("ShaderMaterial_hujyv")
 offset_right = 1000.0
 offset_bottom = 1000.0
+
+[node name="RigidBody2D" parent="." instance=ExtResource("4_hi16p")]
+position = Vector2(333, 64)
