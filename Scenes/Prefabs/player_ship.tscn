@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7aujwxnkio66"]
+[gd_scene load_steps=11 format=3 uid="uid://c7aujwxnkio66"]
 
 [ext_resource type="Texture2D" uid="uid://c4wt4tbr0nrrg" path="res://Sprites/player_ship.png" id="1_133p8"]
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_cnppw"]
@@ -17,14 +17,17 @@ shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
 shader_parameter/size = 0.08
 shader_parameter/intensity = null
 
-[node name="RigidBody2D2" type="RigidBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_42job"]
+radius = 28.0
+
+[node name="RigidBody2D" type="RigidBody2D"]
 gravity_scale = 0.0
 linear_damp = 1.0
 angular_damp = 1.0
 script = ExtResource("1_cnppw")
+greenLaser = ExtResource("7_0546s")
 thrustAcceleration = 5.0
 rotateAcceleration = 0.2
-greenLaser = ExtResource("7_0546s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
@@ -39,10 +42,10 @@ position = Vector2(-4, 17)
 
 [node name="Guns" type="Node2D" parent="."]
 
-[node name="Marker2D" type="Marker2D" parent="Guns"]
+[node name="Left" type="Marker2D" parent="Guns"]
 position = Vector2(-12, 0)
 
-[node name="Marker2D2" type="Marker2D" parent="Guns"]
+[node name="Right" type="Marker2D" parent="Guns"]
 position = Vector2(12, 0)
 
 [node name="Ship" type="Sprite2D" parent="."]
@@ -53,6 +56,12 @@ texture = ExtResource("1_133p8")
 material = SubResource("ShaderMaterial_3nyym")
 position = Vector2(0, 5)
 texture = ExtResource("4_torf4")
+
+[node name="Area2D" type="Area2D" parent="Shield"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shield/Area2D"]
+shape = SubResource("CircleShape2D_42job")
+debug_color = Color(0, 0.980392, 1, 0)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-24, 8, -2, -20, 2, -20, 24, 8, 24, 12, 8, 20, -8, 20, -24, 12)
