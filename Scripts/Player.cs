@@ -29,7 +29,10 @@ public partial class Player : RigidBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Shoot();
+		if (Input.IsActionPressed("jump"))
+		{
+			Shoot();
+		}
 
 		if (Input.IsActionPressed("move_left"))
 		{
@@ -67,7 +70,7 @@ public partial class Player : RigidBody2D
 
 	void Shoot()
 	{
-		if (!Input.IsActionPressed("jump") || timerCooldown.IsActive())
+		if (timerCooldown.IsActive())
 			return;
 
 		timerCooldown.Start();
