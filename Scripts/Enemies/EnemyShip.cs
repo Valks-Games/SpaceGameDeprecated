@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class enemy_ship : RigidBody2D
+public partial class EnemyShip : RigidBody2D
 {
     [Export] float thrustAcceleration = 2.0f;
     [Export] float rotateAcceleration = 0.1f;

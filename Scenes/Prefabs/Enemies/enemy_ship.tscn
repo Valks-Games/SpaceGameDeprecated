@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://4jvhnoaanoae"]
 
-[ext_resource type="Script" path="res://Scripts/Enemies/enemy_ship.cs" id="1_goopm"]
-[ext_resource type="Texture2D" path="res://Sprites/enemy_ship.png" id="1_x8fuu"]
+[ext_resource type="Script" path="res://Scripts/Enemies/EnemyShip.cs" id="1_goopm"]
+[ext_resource type="Texture2D" uid="uid://c26b851l2s442" path="res://Sprites/enemy_ship.png" id="1_x8fuu"]
 [ext_resource type="Shader" path="res://Shaders/2D/shield.gdshader" id="2_8bxnb"]
 [ext_resource type="Texture2D" uid="uid://c7wpof6c8ax53" path="res://Sprites/circle.png" id="3_mnd0r"]
 
