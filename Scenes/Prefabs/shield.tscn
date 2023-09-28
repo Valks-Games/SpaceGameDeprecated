@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/Shield.cs" id="3_6q537"]
 
-[sub_resource type="Shader" id="Shader_hnvj7"]
+[sub_resource type="Shader" id="Shader_wknoj"]
+resource_local_to_scene = true
 code = "shader_type canvas_item;
 
 uniform vec4 color : source_color;
@@ -28,26 +29,28 @@ void vertex(){
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qbajb"]
-shader = SubResource("Shader_hnvj7")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lk4yf"]
+resource_local_to_scene = true
+shader = SubResource("Shader_wknoj")
 shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
-shader_parameter/size = 0.018683
+shader_parameter/size = -0.00756697
 shader_parameter/intensity = null
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5qs7y"]
 load_path = "res://.godot/imported/circle.png-df010cbefcc6dbdc6528d2564633ee87.ctex"
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_42job"]
-radius = 18.79
+[sub_resource type="CircleShape2D" id="CircleShape2D_eid86"]
+resource_local_to_scene = true
+radius = 14.87
 
 [node name="Shield" type="Sprite2D" groups=["Player"]]
-material = SubResource("ShaderMaterial_qbajb")
+material = SubResource("ShaderMaterial_lk4yf")
 texture = SubResource("CompressedTexture2D_5qs7y")
 script = ExtResource("3_6q537")
-Radius = 18.79
+Radius = 14.87
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_42job")
+shape = SubResource("CircleShape2D_eid86")
 debug_color = Color(0, 0.980392, 1, 0)

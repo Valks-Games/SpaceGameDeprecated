@@ -32,7 +32,7 @@ scale_max = 2.8
 scale_curve = SubResource("CurveTexture_ne1ta")
 color_ramp = SubResource("GradientTexture1D_bmfw1")
 
-[sub_resource type="Shader" id="Shader_28hrc"]
+[sub_resource type="Shader" id="Shader_4wga1"]
 code = "shader_type canvas_item;
 
 uniform vec4 color : source_color;
@@ -58,10 +58,10 @@ void vertex(){
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_114lf"]
-shader = SubResource("Shader_28hrc")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1fqts"]
+shader = SubResource("Shader_4wga1")
 shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
-shader_parameter/size = -0.00756697
+shader_parameter/size = -0.00157366
 shader_parameter/intensity = null
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ymv3c"]
@@ -91,8 +91,8 @@ rotation = 1.5708
 polygon = PackedVector2Array(-2, -10, 2, -10, 12, 0, 12, 4, 10, 6, 2, 10, -2, 10, -10, 6, -12, 4, -12, 0, -10, -2)
 
 [node name="Shield" parent="." instance=ExtResource("3_jrcen")]
-material = SubResource("ShaderMaterial_114lf")
-Radius = 14.87
+material = SubResource("ShaderMaterial_1fqts")
+Radius = 15.765
 
 [node name="Detection" type="Area2D" parent="."]
 

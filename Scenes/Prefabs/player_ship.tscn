@@ -10,7 +10,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1vrck"]
 shader = ExtResource("3_qoss6")
 
-[sub_resource type="Shader" id="Shader_lep2h"]
+[sub_resource type="Shader" id="Shader_wapd8"]
 code = "shader_type canvas_item;
 
 uniform vec4 color : source_color;
@@ -36,10 +36,10 @@ void vertex(){
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nb60v"]
-shader = SubResource("Shader_lep2h")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cr0o1"]
+shader = SubResource("Shader_wapd8")
 shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
-shader_parameter/size = 0.0895982
+shader_parameter/size = 0.0877232
 shader_parameter/intensity = null
 
 [node name="RigidBody2D" type="RigidBody2D"]
@@ -75,9 +75,9 @@ material = SubResource("ShaderMaterial_1vrck")
 texture = ExtResource("1_133p8")
 
 [node name="Shield" parent="." instance=ExtResource("6_7sqt6")]
-material = SubResource("ShaderMaterial_nb60v")
+material = SubResource("ShaderMaterial_cr0o1")
 position = Vector2(0, 6)
-Radius = 29.38
+Radius = 29.1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-24, 8, -2, -20, 2, -20, 24, 8, 24, 12, 8, 20, -8, 20, -24, 12)
