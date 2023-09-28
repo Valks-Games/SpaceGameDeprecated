@@ -47,7 +47,7 @@ radius = 14.87
 material = SubResource("ShaderMaterial_lk4yf")
 texture = SubResource("CompressedTexture2D_5qs7y")
 script = ExtResource("3_6q537")
-Radius = 14.87
+radius = 14.87
 
 [node name="Area2D" type="Area2D" parent="."]
 

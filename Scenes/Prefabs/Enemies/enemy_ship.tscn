@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://4jvhnoaanoae"]
+[gd_scene load_steps=13 format=3 uid="uid://4jvhnoaanoae"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/EnemyShip.cs" id="1_goopm"]
 [ext_resource type="Texture2D" uid="uid://c26b851l2s442" path="res://Sprites/enemy_ship.png" id="1_x8fuu"]
+[ext_resource type="PackedScene" uid="uid://cr3340jvh6mr8" path="res://Scenes/Prefabs/explosion.tscn" id="2_qi222"]
 [ext_resource type="PackedScene" uid="uid://2by2t7mhuvgw" path="res://Scenes/Prefabs/shield.tscn" id="3_jrcen"]
 
 [sub_resource type="Gradient" id="Gradient_gtwqj"]
@@ -72,6 +73,7 @@ gravity_scale = 0.0
 linear_damp = 1.0
 angular_damp = 1.0
 script = ExtResource("1_goopm")
+explosion = ExtResource("2_qi222")
 
 [node name="Engine Particles" type="Node2D" parent="."]
 rotation = 1.5708
@@ -92,7 +94,7 @@ polygon = PackedVector2Array(-2, -10, 2, -10, 12, 0, 12, 4, 10, 6, 2, 10, -2, 10
 
 [node name="Shield" parent="." instance=ExtResource("3_jrcen")]
 material = SubResource("ShaderMaterial_1fqts")
-Radius = 15.765
+radius = 15.765
 
 [node name="Detection" type="Area2D" parent="."]
 

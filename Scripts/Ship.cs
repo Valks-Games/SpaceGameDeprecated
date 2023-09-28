@@ -9,6 +9,8 @@ public abstract partial class Ship : RigidBody2D
     [Export] protected float rotateAcceleration = 0.1f;
     [Export] bool enginesEmittingOnReady;
 
+    [Export] PackedScene explosion;
+
     protected List<GpuParticles2D> engineParticles = new();
     protected List<Marker2D> gunFirePositions = new();
 
@@ -35,6 +37,17 @@ public abstract partial class Ship : RigidBody2D
 
         if (hullHP <= 0)
         {
+            // Spawn explosion particles
+            GpuParticles2D particles = explosion.Instantiate<GpuParticles2D>();
+            GetTree().Root.AddChild(particles);
+            particles.Position = Position;
+            particles.Emitting = true;
+            particles.CreateTween().TweenCallback(Callable.From(() =>
+            {
+                particles.QueueFree();
+            })).SetDelay(3);
+
+            // Destroy ship
             QueueFree();
         }
     }
