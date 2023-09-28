@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://2by2t7mhuvgw"]
+
+[ext_resource type="Script" path="res://Scripts/Shield.cs" id="3_6q537"]
+
+[sub_resource type="Shader" id="Shader_hnvj7"]
+code = "shader_type canvas_item;
+
+uniform vec4 color : source_color;
+uniform float size : hint_range(0, 0.375);
+uniform float intensity : hint_range(0, 0.6);
+
+float circle(vec2 position, float radius, float feather)
+{
+	return smoothstep(radius, radius + feather, length(position - vec2(0.5)));
+}
+
+void fragment() {
+	float fade_effect = sin(TIME) * cos(TIME) * 0.04;
+	float outer = circle(UV, size + 0.1, 0.02) + 0.6 - intensity;
+	float inner = 1.0 - circle(UV, size + 0.01, 0.1 - fade_effect);
+	
+	COLOR = vec4(UV, color.g, color.b);
+	COLOR.a -= outer + inner;
+}
+
+void vertex(){
+	//VERTEX += vec2(cos(TIME)*10.0, sin(TIME)*10.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qbajb"]
+shader = SubResource("Shader_hnvj7")
+shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
+shader_parameter/size = 0.018683
+shader_parameter/intensity = null
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5qs7y"]
+load_path = "res://.godot/imported/circle.png-df010cbefcc6dbdc6528d2564633ee87.ctex"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_42job"]
+radius = 18.79
+
+[node name="Shield" type="Sprite2D" groups=["Player"]]
+material = SubResource("ShaderMaterial_qbajb")
+texture = SubResource("CompressedTexture2D_5qs7y")
+script = ExtResource("3_6q537")
+Radius = 18.79
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_42job")
+debug_color = Color(0, 0.980392, 1, 0)

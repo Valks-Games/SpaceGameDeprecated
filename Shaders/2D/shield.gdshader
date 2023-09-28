@@ -1,8 +1,9 @@
 shader_type canvas_item;
 
 uniform vec4 color : source_color;
-uniform float size : hint_range(0, 0.6);
+uniform float size : hint_range(0, 0.375);
 uniform float intensity : hint_range(0, 0.6);
+
 float circle(vec2 position, float radius, float feather)
 {
 	return smoothstep(radius, radius + feather, length(position - vec2(0.5)));

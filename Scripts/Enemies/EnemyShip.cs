@@ -1,22 +1,13 @@
 namespace SpaceGame;
 
-public partial class EnemyShip : RigidBody2D
+public partial class EnemyShip : Ship
 {
-    [Export] float thrustAcceleration = 2.0f;
-    [Export] float rotateAcceleration = 0.1f;
-
     RigidBody2D player;
-    List<GpuParticles2D> engineParticles = new();
 
     public override void _Ready()
 	{
+        base._Ready();
         player = GetTree().GetFirstNodeInGroup("Player") as RigidBody2D;
-
-        foreach (GpuParticles2D particles in GetNode("Engine Particles").GetChildren())
-        {
-            particles.Emitting = true;
-            engineParticles.Add(particles);
-        }
     }
 
     public override void _PhysicsProcess(double delta)
