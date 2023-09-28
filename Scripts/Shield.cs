@@ -3,7 +3,7 @@ namespace SpaceGame;
 [Tool]
 public partial class Shield : Sprite2D
 {
-    [Export] float Radius
+    [Export] float radius
     {
         get 
         {
@@ -29,6 +29,28 @@ public partial class Shield : Sprite2D
                 material.SetShaderParameter("size", shaderRadius);
             }
         }
+    }
+
+    Area2D area;
+
+    public override void _Ready()
+    {
+        if (!Engine.IsEditorHint())
+        {
+            area = GetNode<Area2D>("Area2D");
+        }
+    }
+
+    public void Deactivate()
+    {
+        Hide();
+        area.SetDeferred("monitoring", false);
+    }
+
+    public void Activate()
+    {
+        Show();
+        area.SetDeferred("monitoring", true);
     }
 
     CircleShape2D GetCircle()

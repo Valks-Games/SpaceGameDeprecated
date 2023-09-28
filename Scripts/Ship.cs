@@ -2,6 +2,9 @@
 
 public abstract partial class Ship : RigidBody2D
 {
+    [Export] int maxShieldHP = 3;
+    [Export] int maxHullHP = 3;
+    [Export] double shieldRegenDelay = 3;
     [Export] protected float thrustAcceleration = 2.0f;
     [Export] protected float rotateAcceleration = 0.1f;
     [Export] bool enginesEmittingOnReady;
@@ -10,14 +13,30 @@ public abstract partial class Ship : RigidBody2D
     protected List<Marker2D> gunFirePositions = new();
 
     ShaderMaterial shieldMaterial;
-    Sprite2D shield;
+    Shield shield;
     GTween tweenShield;
+
+    int shieldHP;
+    int hullHP;
 
     public override void _Ready()
     {
+        shieldHP = maxShieldHP;
+        hullHP = maxHullHP;
+
         InitEngineParticles();
         InitGuns();
         InitShield();
+    }
+
+    public void HullDamage(int damage)
+    {
+        hullHP -= damage;
+
+        if (hullHP <= 0)
+        {
+            QueueFree();
+        }
     }
 
     protected void SetEngineParticlesEmitting(bool emitting, double lifeTime = -1)
@@ -31,9 +50,24 @@ public abstract partial class Ship : RigidBody2D
         }
     }
 
-    void ShieldDamage()
+    void ShieldDamage(int damage)
     {
-        AnimateShield();
+        shieldHP -= damage;
+
+        if (shieldHP <= 0)
+        {
+            shield.Deactivate();
+
+            CreateTween().TweenCallback(Callable.From(() =>
+            {
+                shield.Activate();
+                shieldHP = maxShieldHP;
+            })).SetDelay(shieldRegenDelay);
+        }
+        else
+        {
+            AnimateShield();
+        }
     }
 
     void AnimateShield()
@@ -64,7 +98,7 @@ public abstract partial class Ship : RigidBody2D
 
     void InitShield()
     {
-        shield = GetNodeOrNull<Sprite2D>("Shield");
+        shield = GetNodeOrNull<Shield>("Shield");
 
         if (shield == null)
             return;
@@ -90,7 +124,7 @@ public abstract partial class Ship : RigidBody2D
                 projectile.OwnerId == GetInstanceId())
                 return;
 
-            ShieldDamage();
+            ShieldDamage(projectile.Damage);
             projectile.QueueFree();
         };
     }
