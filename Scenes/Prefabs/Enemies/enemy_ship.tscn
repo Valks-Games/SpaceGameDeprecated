@@ -1,22 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://4jvhnoaanoae"]
+[gd_scene load_steps=12 format=3 uid="uid://4jvhnoaanoae"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/EnemyShip.cs" id="1_goopm"]
 [ext_resource type="Texture2D" uid="uid://c26b851l2s442" path="res://Sprites/enemy_ship.png" id="1_x8fuu"]
-[ext_resource type="PackedScene" uid="uid://cr3340jvh6mr8" path="res://Scenes/Prefabs/explosion.tscn" id="2_qi222"]
 [ext_resource type="PackedScene" uid="uid://2by2t7mhuvgw" path="res://Scenes/Prefabs/shield.tscn" id="3_jrcen"]
 
 [sub_resource type="Gradient" id="Gradient_gtwqj"]
 offsets = PackedFloat32Array(0, 0.480132, 0.629139)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_bmfw1"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_adwpj"]
 gradient = SubResource("Gradient_gtwqj")
 
 [sub_resource type="Curve" id="Curve_vatgv"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_ne1ta"]
+[sub_resource type="CurveTexture" id="CurveTexture_dy0o3"]
 curve = SubResource("Curve_vatgv")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nt6ax"]
@@ -30,8 +29,8 @@ angle_min = -360.0
 angle_max = 360.0
 scale_min = 2.8
 scale_max = 2.8
-scale_curve = SubResource("CurveTexture_ne1ta")
-color_ramp = SubResource("GradientTexture1D_bmfw1")
+scale_curve = SubResource("CurveTexture_dy0o3")
+color_ramp = SubResource("GradientTexture1D_adwpj")
 
 [sub_resource type="Shader" id="Shader_4wga1"]
 code = "shader_type canvas_item;
@@ -73,7 +72,6 @@ gravity_scale = 0.0
 linear_damp = 1.0
 angular_damp = 1.0
 script = ExtResource("1_goopm")
-explosion = ExtResource("2_qi222")
 
 [node name="Engine Particles" type="Node2D" parent="."]
 rotation = 1.5708

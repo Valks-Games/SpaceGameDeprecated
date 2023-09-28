@@ -1,13 +1,81 @@
-[gd_scene load_steps=6 format=3 uid="uid://dla50js744pis"]
+[gd_scene load_steps=17 format=3 uid="uid://dla50js744pis"]
 
 [ext_resource type="Shader" path="res://Shaders/2D/stars.gdshader" id="1_axaq7"]
 [ext_resource type="PackedScene" uid="uid://c7aujwxnkio66" path="res://Scenes/Prefabs/player_ship.tscn" id="1_wawxp"]
 [ext_resource type="PackedScene" uid="uid://c6pism2kgjr5c" path="res://Scenes/Prefabs/UI/popup_menu.tscn" id="2_gbn3x"]
 [ext_resource type="PackedScene" uid="uid://4jvhnoaanoae" path="res://Scenes/Prefabs/Enemies/enemy_ship.tscn" id="4_hi16p"]
+[ext_resource type="Script" path="res://Scripts/Enemies/EnemyShip.cs" id="5_2yg54"]
+[ext_resource type="Texture2D" uid="uid://dlxxpkji4fali" path="res://Sprites/enemy_ship_2.png" id="6_gvqv4"]
+[ext_resource type="PackedScene" uid="uid://2by2t7mhuvgw" path="res://Scenes/Prefabs/shield.tscn" id="7_p51sd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hujyv"]
 shader = ExtResource("1_axaq7")
 shader_parameter/bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_3py4l"]
+offsets = PackedFloat32Array(0, 0.480132, 0.629139)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bmfw1"]
+gradient = SubResource("Gradient_3py4l")
+
+[sub_resource type="Curve" id="Curve_ejpdd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ne1ta"]
+curve = SubResource("Curve_ejpdd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_som6w"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 65, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 10.0
+damping_max = 30.0
+angle_min = -360.0
+angle_max = 360.0
+scale_min = 2.8
+scale_max = 2.8
+scale_curve = SubResource("CurveTexture_ne1ta")
+color_ramp = SubResource("GradientTexture1D_bmfw1")
+
+[sub_resource type="Shader" id="Shader_rmbe1"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec4 color : source_color;
+uniform float size : hint_range(0, 0.375);
+uniform float intensity : hint_range(0, 0.6);
+
+float circle(vec2 position, float radius, float feather)
+{
+	return smoothstep(radius, radius + feather, length(position - vec2(0.5)));
+}
+
+void fragment() {
+	float fade_effect = sin(TIME) * cos(TIME) * 0.04;
+	float outer = circle(UV, size + 0.1, 0.02) + 0.6 - intensity;
+	float inner = 1.0 - circle(UV, size + 0.01, 0.1 - fade_effect);
+	
+	COLOR = vec4(UV, color.g, color.b);
+	COLOR.a -= outer + inner;
+}
+
+void vertex(){
+	//VERTEX += vec2(cos(TIME)*10.0, sin(TIME)*10.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yvlqb"]
+resource_local_to_scene = true
+shader = SubResource("Shader_rmbe1")
+shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
+shader_parameter/size = 0.148594
+shader_parameter/intensity = null
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_difu8"]
+radius = 192.023
 
 [node name="Level" type="Node2D"]
 
@@ -37,3 +105,37 @@ offset_bottom = 1000.0
 
 [node name="Enemy Ship" parent="." instance=ExtResource("4_hi16p")]
 position = Vector2(333, 64)
+
+[node name="Enemy Ship 2" type="RigidBody2D" parent="."]
+position = Vector2(219, 438)
+gravity_scale = 0.0
+script = ExtResource("5_2yg54")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemy Ship 2"]
+rotation = 1.5708
+polygon = PackedVector2Array(0, -32, 15, 0, 24, 20, 20, 32, 8, 16, 0, 24, -8, 16, -20, 33, -24, 20, -16, 0)
+
+[node name="Engine Particles" type="Node2D" parent="Enemy Ship 2"]
+position = Vector2(-14, 0)
+rotation = 1.5708
+
+[node name="Center" type="GPUParticles2D" parent="Enemy Ship 2/Engine Particles"]
+position = Vector2(0, 10)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_som6w")
+local_coords = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy Ship 2"]
+rotation = 1.5708
+texture = ExtResource("6_gvqv4")
+
+[node name="Shield" parent="Enemy Ship 2" instance=ExtResource("7_p51sd")]
+material = SubResource("ShaderMaterial_yvlqb")
+position = Vector2(-4, 0)
+radius = 38.19
+
+[node name="Detection" type="Area2D" parent="Enemy Ship 2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Ship 2/Detection"]
+shape = SubResource("CircleShape2D_difu8")
+debug_color = Color(0.701961, 0.054902, 0, 0)
