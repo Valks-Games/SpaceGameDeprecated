@@ -37,7 +37,8 @@ public partial class EnemyShip : Ship
             if (body is not Player player)
                 return;
 
-            pursuePlayerBeforeIdle.Start();
+            if (pursuePlayerBeforeIdle.IsInsideTree()) // weird that I have to check this
+                pursuePlayerBeforeIdle.Start();
         };
 
         curState = Idle();

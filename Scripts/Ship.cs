@@ -33,6 +33,8 @@ public abstract partial class Ship : RigidBody2D
     {
         hullHP -= damage;
 
+        ParticleUtils.Spawn(Prefabs.ProjectileHit, Position, lifeTime: 3);
+
         if (hullHP <= 0)
         {
             // Spawn explosion particles
