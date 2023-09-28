@@ -67,10 +67,18 @@ public partial class EnemyShip : Ship
 
         state.Update = () =>
         {
-            //Position += (player.Position - Position) / 50;
-            //ApplyCentralImpulse(Vector2.Up * thrustAcceleration);
+            // Slowly rotate towards target
+            // To refactor this to be a constant rotation speed watch the
+            // following YT video: https://www.youtube.com/watch?v=ciT_jDol9G8
+            const float ROTATION_SPEED = 0.05f;
 
-            LookAt(player.Position);
+            Vector2 diff = player.Position - Position;
+
+            float angle = diff.Angle();
+
+            Rotation = Mathf.LerpAngle(Rotation, angle, ROTATION_SPEED);
+
+            // Apply forward thrust
             ApplyCentralImpulse(Vector2.Right.Rotated(Rotation) * thrustAcceleration);
         };
 
