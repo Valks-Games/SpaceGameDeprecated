@@ -8,6 +8,8 @@ public partial class EnemyShip : RigidBody2D
     RigidBody2D player;
     List<GpuParticles2D> engineParticles = new();
 
+    bool _isChasePlayer;
+
     public override void _Ready()
 	{
         player = GetTree().GetFirstNodeInGroup("Player") as RigidBody2D;
@@ -21,10 +23,21 @@ public partial class EnemyShip : RigidBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        //Position += (player.Position - Position) / 50;
-        //ApplyCentralImpulse(Vector2.Up * thrustAcceleration);
+        if (_isChasePlayer)
+            ChasePlayer();
+    }
 
+    void ChasePlayer()
+    {
         LookAt(player.Position);
         ApplyCentralImpulse(Vector2.Right.Rotated(Rotation) * thrustAcceleration);
+    }
+
+    void OnDetectionArea(bool detected)
+    {
+        if (detected)
+            _isChasePlayer = true;
+        else
+            _isChasePlayer = false;
     }
 }

@@ -17,7 +17,7 @@ offset_top = 226.0
 offset_right = 706.0
 offset_bottom = 266.0
 
-[node name="Player Ship" parent="." groups=["Player"] instance=ExtResource("1_wawxp")]
+[node name="Player Ship" parent="." instance=ExtResource("1_wawxp")]
 position = Vector2(554, 361)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

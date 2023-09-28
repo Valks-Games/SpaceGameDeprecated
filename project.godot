@@ -26,6 +26,10 @@ SceneManager="*res://GodotUtils/Autoload/SceneManager.cs"
 
 project/assembly_name="Template"
 
+[editor]
+
+movie_writer/movie_file="D:/VideoOutput/output.avi"
+
 [filesystem]
 
 import/blender/enabled=false

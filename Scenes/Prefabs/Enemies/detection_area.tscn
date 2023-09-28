@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://by14puduhrxo"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/DetectionArea.cs" id="1_1xgmp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i330t"]
+radius = 171.026
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ip85x"]
+radius = 341.006
+
+[node name="Detection Area" type="Node2D"]
+script = ExtResource("1_1xgmp")
+
+[node name="Detection Found" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection Found"]
+shape = SubResource("CircleShape2D_i330t")
+
+[node name="Detection Loss" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Detection Loss"]
+shape = SubResource("CircleShape2D_ip85x")
+
+[connection signal="body_entered" from="Detection Found" to="." method="OnDetectionAreaEntered"]
+[connection signal="body_exited" from="Detection Loss" to="." method="OnDetectionAreaExited"]

@@ -17,7 +17,7 @@ shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
 shader_parameter/size = 0.08
 shader_parameter/intensity = null
 
-[node name="RigidBody2D2" type="RigidBody2D"]
+[node name="RigidBody2D2" type="RigidBody2D" groups=["Player"]]
 gravity_scale = 0.0
 linear_damp = 1.0
 angular_damp = 1.0
@@ -49,7 +49,7 @@ position = Vector2(12, 0)
 material = SubResource("ShaderMaterial_1vrck")
 texture = ExtResource("1_133p8")
 
-[node name="Shield" type="Sprite2D" parent="." groups=["Player"]]
+[node name="Shield" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_3nyym")
 position = Vector2(0, 5)
 texture = ExtResource("4_torf4")
