@@ -37,20 +37,12 @@ public partial class Player : Ship
 
         if (Input.IsActionJustPressed("move_up"))
         {
-            engineParticles.ForEach(x =>
-            {
-                x.Lifetime = 1f;
-                x.Emitting = true;
-            });
+            SetEngineParticlesEmitting(true, lifeTime: 1.0);
         }
 
         if (Input.IsActionJustReleased("move_up"))
         {
-            engineParticles.ForEach(x =>
-            {
-                x.Lifetime = 0.5f;
-                x.Emitting = false;
-            });
+            SetEngineParticlesEmitting(false, lifeTime: 0.5);
         }
     }
 

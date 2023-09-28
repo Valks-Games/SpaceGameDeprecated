@@ -20,6 +20,17 @@ public abstract partial class Ship : RigidBody2D
         InitShield();
     }
 
+    protected void SetEngineParticlesEmitting(bool emitting, double lifeTime = -1)
+    {
+        foreach (GpuParticles2D particle in engineParticles)
+        {
+            particle.Emitting = emitting;
+
+            if (lifeTime != -1)
+                particle.Lifetime = lifeTime;
+        }
+    }
+
     void ShieldDamage()
     {
         AnimateShield();
