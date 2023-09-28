@@ -1,6 +1,6 @@
 namespace SpaceGame;
 
-public partial class EnemyShip : Ship
+public partial class AIShip : Ship
 {
     [Export] int pursuePlayerTime = 5000;
 

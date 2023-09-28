@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c7aujwxnkio66" path="res://Scenes/Prefabs/player_ship.tscn" id="1_wawxp"]
 [ext_resource type="PackedScene" uid="uid://c6pism2kgjr5c" path="res://Scenes/Prefabs/UI/popup_menu.tscn" id="2_gbn3x"]
 [ext_resource type="PackedScene" uid="uid://4jvhnoaanoae" path="res://Scenes/Prefabs/Enemies/enemy_ship.tscn" id="4_hi16p"]
-[ext_resource type="Script" path="res://Scripts/Enemies/EnemyShip.cs" id="5_2yg54"]
+[ext_resource type="Script" path="res://Scripts/AI/AIShip.cs" id="5_w6cpd"]
 [ext_resource type="Texture2D" uid="uid://dlxxpkji4fali" path="res://Sprites/enemy_ship_2.png" id="6_gvqv4"]
 [ext_resource type="PackedScene" uid="uid://2by2t7mhuvgw" path="res://Scenes/Prefabs/shield.tscn" id="7_p51sd"]
 
@@ -67,7 +67,7 @@ void vertex(){
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yvlqb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_58d0q"]
 resource_local_to_scene = true
 shader = SubResource("Shader_rmbe1")
 shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
@@ -110,7 +110,7 @@ position = Vector2(333, 64)
 position = Vector2(219, 438)
 mass = 10.0
 gravity_scale = 0.0
-script = ExtResource("5_2yg54")
+script = ExtResource("5_w6cpd")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemy Ship 2"]
 rotation = 1.5708
@@ -131,7 +131,7 @@ rotation = 1.5708
 texture = ExtResource("6_gvqv4")
 
 [node name="Shield" parent="Enemy Ship 2" instance=ExtResource("7_p51sd")]
-material = SubResource("ShaderMaterial_yvlqb")
+material = SubResource("ShaderMaterial_58d0q")
 position = Vector2(-4, 0)
 radius = 38.19
 

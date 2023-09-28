@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://4jvhnoaanoae"]
 
-[ext_resource type="Script" path="res://Scripts/Enemies/EnemyShip.cs" id="1_goopm"]
+[ext_resource type="Script" path="res://Scripts/AI/AIShip.cs" id="1_goopm"]
 [ext_resource type="Texture2D" uid="uid://c26b851l2s442" path="res://Sprites/enemy_ship.png" id="1_x8fuu"]
 [ext_resource type="PackedScene" uid="uid://2by2t7mhuvgw" path="res://Scenes/Prefabs/shield.tscn" id="3_jrcen"]
 
