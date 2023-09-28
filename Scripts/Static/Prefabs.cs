@@ -2,6 +2,7 @@ namespace SpaceGame;
 
 public static class Prefabs
 {
+    public static PackedScene Explosion { get; } = Load("explosion");
     public static PackedScene Options { get; } = Load("UI/options");
 
     static PackedScene Load(string path) =>
