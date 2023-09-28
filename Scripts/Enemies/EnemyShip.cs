@@ -2,12 +2,22 @@ namespace SpaceGame;
 
 public partial class EnemyShip : Ship
 {
+    [Export] int pursuePlayerTime = 5000;
+
+    GTimer pursuePlayerBeforeIdle;
     State curState;
     RigidBody2D player;
 
     public override void _Ready()
 	{
         base._Ready();
+
+        pursuePlayerBeforeIdle = new(this, pursuePlayerTime);
+        pursuePlayerBeforeIdle.Finished += () =>
+        {
+            SwitchState(Idle());
+        };
+
         player = GetTree().GetFirstNodeInGroup("Player") as RigidBody2D;
 
         Area2D detectionArea = GetNode<Area2D>("Detection");
@@ -17,6 +27,8 @@ public partial class EnemyShip : Ship
             if (body is not Player player)
                 return;
 
+            pursuePlayerBeforeIdle.Stop();
+
             SwitchState(Attack());
         };
 
@@ -25,7 +37,7 @@ public partial class EnemyShip : Ship
             if (body is not Player player)
                 return;
 
-            SwitchState(Idle());
+            pursuePlayerBeforeIdle.Start();
         };
 
         curState = Idle();
