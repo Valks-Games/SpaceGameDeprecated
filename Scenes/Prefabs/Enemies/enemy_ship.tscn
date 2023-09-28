@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://4jvhnoaanoae"]
+[gd_scene load_steps=9 format=3 uid="uid://4jvhnoaanoae"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/EnemyShip.cs" id="1_goopm"]
 [ext_resource type="Texture2D" uid="uid://c26b851l2s442" path="res://Sprites/enemy_ship.png" id="1_x8fuu"]
-[ext_resource type="Shader" path="res://Shaders/2D/shield.gdshader" id="2_8bxnb"]
-[ext_resource type="Texture2D" uid="uid://c7wpof6c8ax53" path="res://Sprites/circle.png" id="3_mnd0r"]
+[ext_resource type="PackedScene" uid="uid://2by2t7mhuvgw" path="res://Scenes/Prefabs/shield.tscn" id="3_jrcen"]
 
 [sub_resource type="Gradient" id="Gradient_gtwqj"]
 offsets = PackedFloat32Array(0, 0.480132, 0.629139)
@@ -33,15 +32,6 @@ scale_max = 2.8
 scale_curve = SubResource("CurveTexture_ne1ta")
 color_ramp = SubResource("GradientTexture1D_bmfw1")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_k1722"]
-shader = ExtResource("2_8bxnb")
-shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
-shader_parameter/size = 0.0
-shader_parameter/intensity = 0.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_fsnb5"]
-radius = 16.0
-
 [node name="RigidBody2D" type="RigidBody2D"]
 gravity_scale = 0.0
 linear_damp = 1.0
@@ -62,17 +52,9 @@ local_coords = true
 rotation = 1.5708
 texture = ExtResource("1_x8fuu")
 
-[node name="Shield" type="Sprite2D" parent="." groups=["Enemies"]]
-material = SubResource("ShaderMaterial_k1722")
-position = Vector2(0, 1)
-texture = ExtResource("3_mnd0r")
-
-[node name="Area2D" type="Area2D" parent="Shield"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shield/Area2D"]
-shape = SubResource("CircleShape2D_fsnb5")
-debug_color = Color(0, 0.858824, 1, 0)
-
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 rotation = 1.5708
 polygon = PackedVector2Array(-2, -10, 2, -10, 12, 0, 12, 4, 10, 6, 2, 10, -2, 10, -10, 6, -12, 4, -12, 0, -10, -2)
+
+[node name="Shield" parent="." instance=ExtResource("3_jrcen")]
+Radius = 18.79
