@@ -3,6 +3,19 @@ namespace SpaceGame;
 [Tool]
 public partial class Shield : Sprite2D
 {
+    public override void _Ready()
+    {
+        // Make all sub-resources of Shield unique
+        Material = (ShaderMaterial)Material.Duplicate(subresources: true);
+        CollisionShape2D collision =
+            GetNodeOrNull<CollisionShape2D>("Area2D/CollisionShape2D");
+
+        if (collision == null)
+            return;
+
+        collision.Shape = (CircleShape2D)collision.Shape.Duplicate();
+    }
+
     [Export] float Radius
     {
         get 

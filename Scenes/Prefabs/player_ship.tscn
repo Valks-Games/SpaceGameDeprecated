@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7aujwxnkio66"]
+[gd_scene load_steps=10 format=3 uid="uid://c7aujwxnkio66"]
 
 [ext_resource type="Texture2D" uid="uid://c4wt4tbr0nrrg" path="res://Sprites/player_ship.png" id="1_133p8"]
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_cnppw"]
@@ -9,6 +9,38 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1vrck"]
 shader = ExtResource("3_qoss6")
+
+[sub_resource type="Shader" id="Shader_lep2h"]
+code = "shader_type canvas_item;
+
+uniform vec4 color : source_color;
+uniform float size : hint_range(0, 0.375);
+uniform float intensity : hint_range(0, 0.6);
+
+float circle(vec2 position, float radius, float feather)
+{
+	return smoothstep(radius, radius + feather, length(position - vec2(0.5)));
+}
+
+void fragment() {
+	float fade_effect = sin(TIME) * cos(TIME) * 0.04;
+	float outer = circle(UV, size + 0.1, 0.02) + 0.6 - intensity;
+	float inner = 1.0 - circle(UV, size + 0.01, 0.1 - fade_effect);
+	
+	COLOR = vec4(UV, color.g, color.b);
+	COLOR.a -= outer + inner;
+}
+
+void vertex(){
+	//VERTEX += vec2(cos(TIME)*10.0, sin(TIME)*10.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nb60v"]
+shader = SubResource("Shader_lep2h")
+shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
+shader_parameter/size = 0.0895982
+shader_parameter/intensity = null
 
 [node name="RigidBody2D" type="RigidBody2D"]
 gravity_scale = 0.0
@@ -43,8 +75,9 @@ material = SubResource("ShaderMaterial_1vrck")
 texture = ExtResource("1_133p8")
 
 [node name="Shield" parent="." instance=ExtResource("6_7sqt6")]
+material = SubResource("ShaderMaterial_nb60v")
 position = Vector2(0, 6)
-Radius = 30.51
+Radius = 29.38
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-24, 8, -2, -20, 2, -20, 24, 8, 24, 12, 8, 20, -8, 20, -24, 12)

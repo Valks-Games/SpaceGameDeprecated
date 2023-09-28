@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://4jvhnoaanoae"]
+[gd_scene load_steps=11 format=3 uid="uid://4jvhnoaanoae"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/EnemyShip.cs" id="1_goopm"]
 [ext_resource type="Texture2D" uid="uid://c26b851l2s442" path="res://Sprites/enemy_ship.png" id="1_x8fuu"]
@@ -32,6 +32,38 @@ scale_max = 2.8
 scale_curve = SubResource("CurveTexture_ne1ta")
 color_ramp = SubResource("GradientTexture1D_bmfw1")
 
+[sub_resource type="Shader" id="Shader_252h7"]
+code = "shader_type canvas_item;
+
+uniform vec4 color : source_color;
+uniform float size : hint_range(0, 0.375);
+uniform float intensity : hint_range(0, 0.6);
+
+float circle(vec2 position, float radius, float feather)
+{
+	return smoothstep(radius, radius + feather, length(position - vec2(0.5)));
+}
+
+void fragment() {
+	float fade_effect = sin(TIME) * cos(TIME) * 0.04;
+	float outer = circle(UV, size + 0.1, 0.02) + 0.6 - intensity;
+	float inner = 1.0 - circle(UV, size + 0.01, 0.1 - fade_effect);
+	
+	COLOR = vec4(UV, color.g, color.b);
+	COLOR.a -= outer + inner;
+}
+
+void vertex(){
+	//VERTEX += vec2(cos(TIME)*10.0, sin(TIME)*10.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vac45"]
+shader = SubResource("Shader_252h7")
+shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
+shader_parameter/size = -0.00756697
+shader_parameter/intensity = null
+
 [node name="RigidBody2D" type="RigidBody2D"]
 gravity_scale = 0.0
 linear_damp = 1.0
@@ -57,4 +89,5 @@ rotation = 1.5708
 polygon = PackedVector2Array(-2, -10, 2, -10, 12, 0, 12, 4, 10, 6, 2, 10, -2, 10, -10, 6, -12, 4, -12, 0, -10, -2)
 
 [node name="Shield" parent="." instance=ExtResource("3_jrcen")]
-Radius = 18.79
+material = SubResource("ShaderMaterial_vac45")
+Radius = 14.87
