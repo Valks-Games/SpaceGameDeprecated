@@ -3,7 +3,7 @@ namespace SpaceGame;
 [Tool]
 public partial class Shield : Sprite2D
 {
-    [Export] float radius
+    [Export] public float Radius
     {
         get 
         {

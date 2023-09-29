@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c7aujwxnkio66"]
+[gd_scene load_steps=10 format=3 uid="uid://c7aujwxnkio66"]
 
 [ext_resource type="Texture2D" uid="uid://c4wt4tbr0nrrg" path="res://Sprites/player_ship.png" id="1_133p8"]
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_cnppw"]
 [ext_resource type="PackedScene" uid="uid://dne2qghftgkgv" path="res://Scenes/Prefabs/engine_particles.tscn" id="2_xhrih"]
 [ext_resource type="Shader" path="res://Shaders/2D/ship.gdshader" id="3_qoss6"]
-[ext_resource type="PackedScene" uid="uid://cr3340jvh6mr8" path="res://Scenes/Prefabs/explosion.tscn" id="3_yy03e"]
-[ext_resource type="PackedScene" uid="uid://2by2t7mhuvgw" path="res://Scenes/Prefabs/shield.tscn" id="6_7sqt6"]
+[ext_resource type="PackedScene" uid="uid://2by2t7mhuvgw" path="res://Scenes/Prefabs/Components/shield.tscn" id="6_7sqt6"]
 [ext_resource type="PackedScene" uid="uid://cj2l4pjic6ibr" path="res://Scenes/Prefabs/green_laser.tscn" id="7_0546s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1vrck"]
@@ -40,7 +39,7 @@ void vertex(){
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cr0o1"]
 shader = SubResource("Shader_wapd8")
 shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
-shader_parameter/size = 0.0877232
+shader_parameter/size = 0.101451
 shader_parameter/intensity = null
 
 [node name="RigidBody2D" type="RigidBody2D"]
@@ -51,7 +50,6 @@ script = ExtResource("1_cnppw")
 greenLaser = ExtResource("7_0546s")
 thrustAcceleration = 5.0
 rotateAcceleration = 0.2
-explosion = ExtResource("3_yy03e")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
@@ -79,6 +77,7 @@ texture = ExtResource("1_133p8")
 [node name="Shield" parent="." instance=ExtResource("6_7sqt6")]
 material = SubResource("ShaderMaterial_cr0o1")
 position = Vector2(0, 6)
+radius = 31.15
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-24, 8, -2, -20, 2, -20, 24, 8, 24, 12, 8, 20, -8, 20, -24, 12)

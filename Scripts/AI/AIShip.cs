@@ -1,17 +1,41 @@
 namespace SpaceGame;
 
+[Tool]
 public partial class AIShip : Ship
 {
-    [Export] int pursuePlayerTime = 5000;
-
     GTimer pursuePlayer;
     State curState;
     RigidBody2D player;
 
     public override void _Ready()
-	{
-        base._Ready();
+    {
+        // In-Game
+        if (!Engine.IsEditorHint())
+        {
+            base._Ready();
+            Init();
+        }
+        // In-Editor
+        else
+        {
+            SetPhysicsProcess(false);
+        }
+    }
 
+    public override void _PhysicsProcess(double delta)
+    {
+        curState.Update();
+    }
+
+    void SwitchState(State newState)
+    {
+        curState.Exit();
+        curState = newState;
+        curState.Enter();
+    }
+
+    void Init()
+    {
         pursuePlayer = new(this, pursuePlayerTime);
         pursuePlayer.Finished += () =>
         {
@@ -41,18 +65,6 @@ public partial class AIShip : Ship
         };
 
         curState = Idle();
-        curState.Enter();
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        curState.Update();
-    }
-
-    void SwitchState(State newState)
-    {
-        curState.Exit();
-        curState = newState;
         curState.Enter();
     }
 }

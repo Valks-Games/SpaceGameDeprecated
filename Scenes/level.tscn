@@ -3,10 +3,10 @@
 [ext_resource type="Shader" path="res://Shaders/2D/stars.gdshader" id="1_axaq7"]
 [ext_resource type="PackedScene" uid="uid://c7aujwxnkio66" path="res://Scenes/Prefabs/player_ship.tscn" id="1_wawxp"]
 [ext_resource type="PackedScene" uid="uid://c6pism2kgjr5c" path="res://Scenes/Prefabs/UI/popup_menu.tscn" id="2_gbn3x"]
-[ext_resource type="PackedScene" uid="uid://4jvhnoaanoae" path="res://Scenes/Prefabs/Enemies/enemy_ship.tscn" id="4_hi16p"]
+[ext_resource type="PackedScene" uid="uid://bw0p6lpwemanp" path="res://Scenes/Prefabs/Enemies/enemy_ship.tscn" id="4_hi16p"]
 [ext_resource type="Script" path="res://Scripts/AI/AIShip.cs" id="5_w6cpd"]
 [ext_resource type="Texture2D" uid="uid://dlxxpkji4fali" path="res://Sprites/enemy_ship_2.png" id="6_gvqv4"]
-[ext_resource type="PackedScene" uid="uid://2by2t7mhuvgw" path="res://Scenes/Prefabs/shield.tscn" id="7_p51sd"]
+[ext_resource type="PackedScene" uid="uid://2by2t7mhuvgw" path="res://Scenes/Prefabs/Components/shield.tscn" id="7_p51sd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hujyv"]
 shader = ExtResource("1_axaq7")
@@ -67,15 +67,15 @@ void vertex(){
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_58d0q"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l33np"]
 resource_local_to_scene = true
 shader = SubResource("Shader_rmbe1")
 shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
-shader_parameter/size = 0.148594
+shader_parameter/size = 0.18067
 shader_parameter/intensity = null
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_difu8"]
-radius = 192.023
+radius = 200.0
 
 [node name="Level" type="Node2D"]
 
@@ -105,12 +105,16 @@ offset_bottom = 1000.0
 
 [node name="Enemy Ship" parent="." instance=ExtResource("4_hi16p")]
 position = Vector2(333, 64)
+shieldRadius = 22.24
+detectionRadius = 200.0
 
 [node name="Enemy Ship 2" type="RigidBody2D" parent="."]
 position = Vector2(219, 438)
 mass = 10.0
 gravity_scale = 0.0
 script = ExtResource("5_w6cpd")
+shieldRadius = 42.98
+detectionRadius = 200.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemy Ship 2"]
 rotation = 1.5708
@@ -131,9 +135,9 @@ rotation = 1.5708
 texture = ExtResource("6_gvqv4")
 
 [node name="Shield" parent="Enemy Ship 2" instance=ExtResource("7_p51sd")]
-material = SubResource("ShaderMaterial_58d0q")
+material = SubResource("ShaderMaterial_l33np")
 position = Vector2(-4, 0)
-radius = 38.19
+Radius = 42.98
 
 [node name="Detection" type="Area2D" parent="Enemy Ship 2"]
 
