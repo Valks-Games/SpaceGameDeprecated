@@ -74,7 +74,6 @@ angular_damp = 1.0
 script = ExtResource("1_goopm")
 shieldRadius = 19.525
 detectionRadius = 200.0
-thrustAcceleration = 2.0
 
 [node name="Engine Particles" type="Node2D" parent="."]
 rotation = 1.5708
