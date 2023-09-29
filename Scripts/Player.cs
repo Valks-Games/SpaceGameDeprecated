@@ -32,7 +32,7 @@ public partial class Player : Ship
 
         if (Input.IsActionPressed("move_up"))
         {
-            ApplyCentralImpulse(Vector2.Up.Rotated(Rotation) * thrustAcceleration);
+            ApplyCentralForce(Vector2.Up.Rotated(Rotation) * thrustAcceleration);
         }
 
         if (Input.IsActionJustPressed("move_up"))

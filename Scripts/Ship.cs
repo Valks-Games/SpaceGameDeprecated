@@ -5,7 +5,7 @@ public abstract partial class Ship : RigidBody2D
     [Export] int maxShieldHP = 3;
     [Export] int maxHullHP = 3;
     [Export] double shieldRegenDelay = 3;
-    [Export] protected float thrustAcceleration = 2.0f;
+    [Export] protected float thrustAcceleration = 100;
     [Export] protected float rotateAcceleration = 0.1f;
     [Export] bool enginesEmittingOnReady;
 

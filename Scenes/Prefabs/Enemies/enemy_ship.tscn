@@ -61,11 +61,11 @@ void vertex(){
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1fqts"]
 shader = SubResource("Shader_4wga1")
 shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
-shader_parameter/size = 0.0349888
+shader_parameter/size = 0.0417857
 shader_parameter/intensity = null
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ymv3c"]
-radius = 68.11
+radius = 200.0
 
 [node name="RigidBody2D" type="RigidBody2D"]
 gravity_scale = 0.0
@@ -73,7 +73,8 @@ linear_damp = 1.0
 angular_damp = 1.0
 script = ExtResource("1_goopm")
 shieldRadius = 19.525
-detectionRadius = 68.11
+detectionRadius = 200.0
+thrustAcceleration = 2.0
 
 [node name="Engine Particles" type="Node2D" parent="."]
 rotation = 1.5708

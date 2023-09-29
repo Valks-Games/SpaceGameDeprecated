@@ -77,7 +77,7 @@ texture = ExtResource("1_133p8")
 [node name="Shield" parent="." instance=ExtResource("6_7sqt6")]
 material = SubResource("ShaderMaterial_cr0o1")
 position = Vector2(0, 6)
-radius = 31.15
+Radius = 31.15
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-24, 8, -2, -20, 2, -20, 24, 8, 24, 12, 8, 20, -8, 20, -24, 12)

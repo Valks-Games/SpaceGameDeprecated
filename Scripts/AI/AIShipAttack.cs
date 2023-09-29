@@ -25,7 +25,7 @@ public partial class AIShip
             Rotation = Mathf.LerpAngle(Rotation, angle, ROTATION_SPEED);
 
             // Apply forward thrust
-            ApplyCentralImpulse(Vector2.Right.Rotated(Rotation) * thrustAcceleration);
+            ApplyCentralForce(Vector2.Right.Rotated(Rotation) * thrustAcceleration);
         };
 
         return state;
