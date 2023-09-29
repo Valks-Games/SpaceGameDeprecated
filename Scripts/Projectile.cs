@@ -18,8 +18,11 @@ public partial class Projectile : Sprite2D
         {
             if (OwnerId != body.GetInstanceId() && body is Ship ship)
             {
-                ship.HullDamage(Damage);
-                QueueFree();
+                if (!ship.ShieldsActive)
+                {
+                    ship.HullDamage(Damage);
+                    QueueFree();
+                }
             }
         };
     }

@@ -116,6 +116,8 @@ gravity_scale = 0.0
 script = ExtResource("5_w6cpd")
 shieldRadius = 42.98
 detectionRadius = 200.0
+maxShieldHP = 15
+maxHullHP = 10
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemy Ship 2"]
 rotation = 1.5708

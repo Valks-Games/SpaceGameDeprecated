@@ -9,6 +9,8 @@ public abstract partial class Ship : RigidBody2D
     [Export] protected float rotateAcceleration = 0.1f;
     [Export] bool enginesEmittingOnReady;
 
+    public bool ShieldsActive { get; private set; }
+
     protected List<GpuParticles2D> engineParticles = new();
     protected List<Marker2D> gunFirePositions = new();
 
@@ -62,10 +64,12 @@ public abstract partial class Ship : RigidBody2D
 
         if (shieldHP <= 0)
         {
+            ShieldsActive = false;
             shield.Deactivate();
 
             CreateTween().TweenCallback(Callable.From(() =>
             {
+                ShieldsActive = true;
                 shield.Activate();
                 shieldHP = maxShieldHP;
             })).SetDelay(shieldRegenDelay);
@@ -123,6 +127,8 @@ public abstract partial class Ship : RigidBody2D
             Logger.LogWarning("A shield sprite was created but it has no Area2D");
             return;
         }
+
+        ShieldsActive = true;
 
         shieldArea.AreaEntered += area =>
         {
