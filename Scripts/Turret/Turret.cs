@@ -1,8 +1,8 @@
-namespace SpaceGame;
+﻿namespace SpaceGame;
 
-public partial class PlayerTurret : Sprite2D
+public abstract partial class Turret : Sprite2D
 {
-    [Export] float rotationSpeed = 0.05f;
+    [Export] protected float rotationSpeed = 0.05f;
 
     public List<Marker2D> Barrels { get; } = new();
 
@@ -12,9 +12,9 @@ public partial class PlayerTurret : Sprite2D
             Barrels.Add(marker);
     }
 
-    public override void _PhysicsProcess(double delta)
+    protected void RotateTowardsTarget(Vector2 target)
     {
-        Vector2 diff = GetGlobalMousePosition() - GlobalPosition;
+        Vector2 diff = target - GlobalPosition;
 
         float shipRot = GetOwner<Node2D>().Rotation;
         float offset = Mathf.Pi / 2;
