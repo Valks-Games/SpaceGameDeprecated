@@ -1,3 +1,5 @@
+using System.Threading;
+
 namespace SpaceGame;
 
 public partial class Player : Ship
@@ -66,11 +68,7 @@ public partial class Player : Ship
         {
             foreach (Marker2D barrel in turret.Barrels)
             {
-                Projectile laser = greenLaser.Instantiate<Projectile>();
-                laser.OwnerId = GetInstanceId();
-                laser.Position = barrel.GlobalPosition;
-                laser.Rotation = turret.GlobalRotation;
-                GetTree().Root.AddChild(laser);
+                SpawnProjectile(barrel.GlobalPosition, turret.GlobalRotation);
             }
         }
     }
@@ -84,12 +82,17 @@ public partial class Player : Ship
 
         foreach (Marker2D marker in hullTurretMarkers)
         {
-            Projectile laser = greenLaser.Instantiate<Projectile>();
-            laser.OwnerId = GetInstanceId();
-            laser.Position = marker.GlobalPosition;
-            laser.Rotation = Rotation;
-            GetTree().Root.AddChild(laser);
+            SpawnProjectile(marker.GlobalPosition, Rotation);
         }
+    }
+
+    void SpawnProjectile(Vector2 position, float rotation)
+    {
+        Projectile laser = greenLaser.Instantiate<Projectile>();
+        laser.OwnerId = GetInstanceId();
+        laser.Position = position;
+        laser.Rotation = rotation;
+        GetTree().Root.AddChild(laser);
     }
 
     void InitRotatingTurrets()
