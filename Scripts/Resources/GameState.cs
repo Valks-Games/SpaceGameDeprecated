@@ -3,10 +3,6 @@ namespace SpaceGame;
 [GlobalClass]
 public partial class GameState : Resource
 {
-    [Export] OptionsManager optionsManager;
-
-    public GameState()
-    {
-        
-    }
+    [Export] public OptionsManager OptionsManager;
+    [Export] public Player Player;
 }

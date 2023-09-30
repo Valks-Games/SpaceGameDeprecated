@@ -5,4 +5,6 @@
 
 [resource]
 script = ExtResource("1_u8wk2")
-optionsManager = ExtResource("1_ohl1b")
+OptionsManager = ExtResource("1_ohl1b")
+Player = Object(RigidBody2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(554, 361),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":false,"mass":1.0,"inertia":0.0,"center_of_mass_mode":0,"center_of_mass":Vector2(0, 0),"physics_material_override":null,"gravity_scale":0.0,"custom_integrator":false,"continuous_cd":0,"max_contacts_reported":0,"contact_monitor":false,"sleeping":false,"can_sleep":true,"lock_rotation":false,"freeze":false,"freeze_mode":0,"linear_velocity":Vector2(0, 0),"linear_damp_mode":0,"linear_damp":1.0,"angular_velocity":0.0,"angular_damp_mode":0,"angular_damp":1.0,"constant_force":Vector2(0, 0),"constant_torque":0.0,"script":Resource("res://Scripts/Player.cs"),"greenLaser":Resource("res://Scenes/Prefabs/green_laser.tscn"),"maxShieldHP":3,"maxHullHP":3,"shieldRegenDelay":3.0,"thrustAcceleration":300.0,"rotateAcceleration":0.2,"enginesEmittingOnReady":false)
+

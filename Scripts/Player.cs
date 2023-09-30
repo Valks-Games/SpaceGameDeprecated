@@ -2,6 +2,7 @@ namespace SpaceGame;
 
 public partial class Player : Ship
 {
+    [Export] GameState gameState;
     [Export] PackedScene greenLaser;
 
     List<PlayerTurret> rotatingTurrets = new();
@@ -12,6 +13,7 @@ public partial class Player : Ship
     public override void _Ready()
     {
         base._Ready();
+        gameState.Player = this;
         hullTurretsCooldown = new(this, fireCooldown) { Loop = false };
         rotatingTurretsCooldown = new(this, fireCooldown) { Loop = false };
         InitRotatingTurrets();

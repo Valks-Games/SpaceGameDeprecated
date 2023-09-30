@@ -18,7 +18,7 @@ public partial class AIShip
             // following YT video: https://www.youtube.com/watch?v=ciT_jDol9G8
             const float ROTATION_SPEED = 0.05f;
 
-            Vector2 diff = player.Position - Position;
+            Vector2 diff = gameState.Player.Position - Position;
 
             float angle = diff.Angle() + Mathf.Pi / 2;
 

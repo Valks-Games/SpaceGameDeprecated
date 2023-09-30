@@ -1,11 +1,11 @@
 namespace SpaceGame;
 
-[Tool]
 public partial class AIShip : Ship
 {
+    [Export] GameState gameState;
+
     GTimer pursuePlayer;
     State curState;
-    RigidBody2D player;
 
     public override void _Ready()
     {
@@ -41,8 +41,6 @@ public partial class AIShip : Ship
         {
             SwitchState(Idle());
         };
-
-        player = GetTree().GetFirstNodeInGroup("Player") as RigidBody2D;
 
         Area2D detectionArea = GetNode<Area2D>("Detection");
 

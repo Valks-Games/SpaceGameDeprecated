@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bw0p6lpwemanp"]
+[gd_scene load_steps=13 format=3 uid="uid://bw0p6lpwemanp"]
 
 [ext_resource type="Script" path="res://Scripts/AI/AIShip.cs" id="1_goopm"]
 [ext_resource type="Texture2D" uid="uid://c26b851l2s442" path="res://Sprites/enemy_ship.png" id="1_x8fuu"]
+[ext_resource type="Resource" uid="uid://b42wyojsytvbi" path="res://Resources/game_state.tres" id="2_lovay"]
 [ext_resource type="PackedScene" uid="uid://2by2t7mhuvgw" path="res://Scenes/Prefabs/Components/shield.tscn" id="3_jrcen"]
 
 [sub_resource type="Gradient" id="Gradient_gtwqj"]
@@ -72,8 +73,7 @@ gravity_scale = 0.0
 linear_damp = 1.0
 angular_damp = 1.0
 script = ExtResource("1_goopm")
-shieldRadius = 19.525
-detectionRadius = 200.0
+gameState = ExtResource("2_lovay")
 
 [node name="Engine Particles" type="Node2D" parent="."]
 
