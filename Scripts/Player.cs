@@ -6,20 +6,27 @@ public partial class Player : Ship
 
     List<PlayerTurret> rotatingTurrets = new();
     float fireCooldown = 250;
-    GTimer timerCooldown;
+    GTimer hullTurretsCooldown;
+    GTimer rotatingTurretsCooldown;
 
     public override void _Ready()
     {
         base._Ready();
-        timerCooldown = new(this, fireCooldown) { Loop = false };
+        hullTurretsCooldown = new(this, fireCooldown) { Loop = false };
+        rotatingTurretsCooldown = new(this, fireCooldown) { Loop = false };
         InitRotatingTurrets();
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        if (Input.IsActionPressed("jump"))
+        if (Input.IsActionPressed("shoot_hull_turrets"))
         {
-            Shoot();
+            ShootHullTurrets();
+        }
+
+        if (Input.IsActionPressed("shoot_rotating_turrets"))
+        {
+            ShootRotatingTurrets();
         }
 
         if (Input.IsActionPressed("move_left"))
@@ -48,21 +55,12 @@ public partial class Player : Ship
         }
     }
 
-    void Shoot()
+    void ShootRotatingTurrets()
     {
-        if (timerCooldown.IsActive())
+        if (rotatingTurretsCooldown.IsActive())
             return;
 
-        timerCooldown.Start();
-
-        foreach (Marker2D marker in hullTurretMarkers)
-        {
-            Projectile laser = greenLaser.Instantiate<Projectile>();
-            laser.OwnerId = GetInstanceId();
-            laser.Position = marker.GlobalPosition;
-            laser.Rotation = Rotation;
-            GetTree().Root.AddChild(laser);
-        }
+        rotatingTurretsCooldown.Start();
 
         foreach (PlayerTurret turret in rotatingTurrets)
         {
@@ -74,6 +72,23 @@ public partial class Player : Ship
                 laser.Rotation = turret.GlobalRotation;
                 GetTree().Root.AddChild(laser);
             }
+        }
+    }
+
+    void ShootHullTurrets()
+    {
+        if (hullTurretsCooldown.IsActive())
+            return;
+
+        hullTurretsCooldown.Start();
+
+        foreach (Marker2D marker in hullTurretMarkers)
+        {
+            Projectile laser = greenLaser.Instantiate<Projectile>();
+            laser.OwnerId = GetInstanceId();
+            laser.Position = marker.GlobalPosition;
+            laser.Rotation = Rotation;
+            GetTree().Root.AddChild(laser);
         }
     }
 
