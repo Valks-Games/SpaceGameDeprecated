@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c6sejp5ejkv1x" path="res://Sprites/player_weapon_1.png" id="6_7od0n"]
 [ext_resource type="PackedScene" uid="uid://2by2t7mhuvgw" path="res://Scenes/Prefabs/Components/shield.tscn" id="6_7sqt6"]
 [ext_resource type="PackedScene" uid="uid://cj2l4pjic6ibr" path="res://Scenes/Prefabs/green_laser.tscn" id="7_0546s"]
-[ext_resource type="Script" path="res://Scripts/ShipWeapon.cs" id="7_kw5lm"]
+[ext_resource type="Script" path="res://Scripts/PlayerTurret.cs" id="7_a4ssq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1vrck"]
 shader = ExtResource("3_qoss6")
@@ -64,23 +64,31 @@ position = Vector2(4, 17)
 [node name="Left" parent="Engine Particles" instance=ExtResource("2_xhrih")]
 position = Vector2(-4, 17)
 
-[node name="Guns" type="Node2D" parent="."]
+[node name="Hull Turrets" type="Node2D" parent="."]
 
-[node name="Left" type="Marker2D" parent="Guns"]
+[node name="Left" type="Marker2D" parent="Hull Turrets"]
 position = Vector2(-12, 0)
 
-[node name="Right" type="Marker2D" parent="Guns"]
+[node name="Right" type="Marker2D" parent="Hull Turrets"]
 position = Vector2(12, 0)
 
 [node name="Ship" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_1vrck")
 texture = ExtResource("1_133p8")
 
-[node name="ShipWeapon" type="Sprite2D" parent="."]
+[node name="Rotating Turrets" type="Node2D" parent="."]
+
+[node name="1" type="Sprite2D" parent="Rotating Turrets"]
 position = Vector2(0, 2.5)
 texture = ExtResource("6_7od0n")
 offset = Vector2(0, -2.5)
-script = ExtResource("7_kw5lm")
+script = ExtResource("7_a4ssq")
+
+[node name="Left" type="Marker2D" parent="Rotating Turrets/1"]
+position = Vector2(-3, -8.5)
+
+[node name="Right" type="Marker2D" parent="Rotating Turrets/1"]
+position = Vector2(3, -8.5)
 
 [node name="Shield" parent="." instance=ExtResource("6_7sqt6")]
 material = SubResource("ShaderMaterial_tk2hb")
@@ -88,4 +96,5 @@ position = Vector2(0, 6)
 Radius = 31.15
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(-24, 8, -2, -20, 2, -20, 24, 8, 24, 12, 8, 20, -8, 20, -24, 12)

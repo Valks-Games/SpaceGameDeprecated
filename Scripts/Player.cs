@@ -4,6 +4,7 @@ public partial class Player : Ship
 {
     [Export] PackedScene greenLaser;
 
+    List<PlayerTurret> rotatingTurrets = new();
     float fireCooldown = 250;
     GTimer timerCooldown;
 
@@ -11,6 +12,7 @@ public partial class Player : Ship
     {
         base._Ready();
         timerCooldown = new(this, fireCooldown) { Loop = false };
+        InitRotatingTurrets();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -53,7 +55,7 @@ public partial class Player : Ship
 
         timerCooldown.Start();
 
-        foreach (Marker2D marker in gunFirePositions)
+        foreach (Marker2D marker in hullTurretMarkers)
         {
             Projectile laser = greenLaser.Instantiate<Projectile>();
             laser.OwnerId = GetInstanceId();
@@ -61,5 +63,28 @@ public partial class Player : Ship
             laser.Rotation = Rotation;
             GetTree().Root.AddChild(laser);
         }
+
+        foreach (PlayerTurret turret in rotatingTurrets)
+        {
+            foreach (Marker2D barrel in turret.Barrels)
+            {
+                Projectile laser = greenLaser.Instantiate<Projectile>();
+                laser.OwnerId = GetInstanceId();
+                laser.Position = barrel.GlobalPosition;
+                laser.Rotation = turret.TurretRotation;
+                GetTree().Root.AddChild(laser);
+            }
+        }
+    }
+
+    void InitRotatingTurrets()
+    {
+        Node turrets = GetNodeOrNull("Rotating Turrets");
+
+        if (turrets == null)
+            return;
+
+        foreach (PlayerTurret turret in turrets.GetChildren())
+            rotatingTurrets.Add(turret);
     }
 }

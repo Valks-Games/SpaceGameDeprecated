@@ -12,7 +12,7 @@ public abstract partial class Ship : RigidBody2D
     public bool ShieldsActive { get; private set; }
 
     protected List<GpuParticles2D> engineParticles = new();
-    protected List<Marker2D> gunFirePositions = new();
+    protected List<Marker2D> hullTurretMarkers = new();
 
     ShaderMaterial shieldMaterial;
     Shield shield;
@@ -27,7 +27,7 @@ public abstract partial class Ship : RigidBody2D
         hullHP = maxHullHP;
 
         InitEngineParticles();
-        InitGuns();
+        InitHullTurrets();
         InitShield();
     }
 
@@ -141,17 +141,15 @@ public abstract partial class Ship : RigidBody2D
         };
     }
 
-    void InitGuns()
+    void InitHullTurrets()
     {
-        Node gunsParent = GetNodeOrNull("Guns");
+        Node turrets = GetNodeOrNull("Hull Turrets");
 
-        if (gunsParent == null)
+        if (turrets == null)
             return;
 
-        foreach (Marker2D marker in gunsParent.GetChildren())
-        {
-            gunFirePositions.Add(marker);
-        }
+        foreach (Marker2D marker in turrets.GetChildren())
+            hullTurretMarkers.Add(marker);
     }
 
     void InitEngineParticles()
