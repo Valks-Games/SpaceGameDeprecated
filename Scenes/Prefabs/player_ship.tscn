@@ -1,16 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7aujwxnkio66"]
+[gd_scene load_steps=12 format=3 uid="uid://c7aujwxnkio66"]
 
 [ext_resource type="Texture2D" uid="uid://c4wt4tbr0nrrg" path="res://Sprites/player_ship.png" id="1_133p8"]
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_cnppw"]
 [ext_resource type="PackedScene" uid="uid://dne2qghftgkgv" path="res://Scenes/Prefabs/engine_particles.tscn" id="2_xhrih"]
 [ext_resource type="Shader" path="res://Shaders/2D/ship.gdshader" id="3_qoss6"]
+[ext_resource type="Texture2D" uid="uid://c6sejp5ejkv1x" path="res://Sprites/player_weapon_1.png" id="6_7od0n"]
 [ext_resource type="PackedScene" uid="uid://2by2t7mhuvgw" path="res://Scenes/Prefabs/Components/shield.tscn" id="6_7sqt6"]
 [ext_resource type="PackedScene" uid="uid://cj2l4pjic6ibr" path="res://Scenes/Prefabs/green_laser.tscn" id="7_0546s"]
+[ext_resource type="Script" path="res://Scripts/ShipWeapon.cs" id="7_kw5lm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1vrck"]
 shader = ExtResource("3_qoss6")
 
-[sub_resource type="Shader" id="Shader_wapd8"]
+[sub_resource type="Shader" id="Shader_1om52"]
 code = "shader_type canvas_item;
 
 uniform vec4 color : source_color;
@@ -36,8 +38,8 @@ void vertex(){
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cr0o1"]
-shader = SubResource("Shader_wapd8")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tk2hb"]
+shader = SubResource("Shader_1om52")
 shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
 shader_parameter/size = 0.101451
 shader_parameter/intensity = null
@@ -74,8 +76,14 @@ position = Vector2(12, 0)
 material = SubResource("ShaderMaterial_1vrck")
 texture = ExtResource("1_133p8")
 
+[node name="ShipWeapon" type="Sprite2D" parent="."]
+position = Vector2(0, 2.5)
+texture = ExtResource("6_7od0n")
+offset = Vector2(0, -2.5)
+script = ExtResource("7_kw5lm")
+
 [node name="Shield" parent="." instance=ExtResource("6_7sqt6")]
-material = SubResource("ShaderMaterial_cr0o1")
+material = SubResource("ShaderMaterial_tk2hb")
 position = Vector2(0, 6)
 Radius = 31.15
 
