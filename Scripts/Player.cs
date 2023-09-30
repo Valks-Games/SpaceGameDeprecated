@@ -71,7 +71,7 @@ public partial class Player : Ship
                 Projectile laser = greenLaser.Instantiate<Projectile>();
                 laser.OwnerId = GetInstanceId();
                 laser.Position = barrel.GlobalPosition;
-                laser.Rotation = turret.TurretRotation;
+                laser.Rotation = turret.GlobalRotation;
                 GetTree().Root.AddChild(laser);
             }
         }

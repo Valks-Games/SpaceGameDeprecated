@@ -4,7 +4,6 @@ public partial class PlayerTurret : Sprite2D
 {
     [Export] float rotationSpeed = 0.05f;
 
-    public float TurretRotation { get; private set; }
     public List<Marker2D> Barrels { get; } = new();
 
     public override void _Ready()
@@ -19,8 +18,8 @@ public partial class PlayerTurret : Sprite2D
 
         float shipRot = GetOwner<Node2D>().Rotation;
         float offset = Mathf.Pi / 2;
-        TurretRotation = diff.Angle() + offset - shipRot;
+        float turretRot = diff.Angle() + offset - shipRot;
 
-        Rotation = Mathf.LerpAngle(Rotation, TurretRotation, rotationSpeed);
+        Rotation = Mathf.LerpAngle(Rotation, turretRot, rotationSpeed);
     }
 }
