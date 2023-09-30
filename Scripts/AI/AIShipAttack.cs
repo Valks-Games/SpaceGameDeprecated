@@ -20,12 +20,12 @@ public partial class AIShip
 
             Vector2 diff = player.Position - Position;
 
-            float angle = diff.Angle();
+            float angle = diff.Angle() + Mathf.Pi / 2;
 
             Rotation = Mathf.LerpAngle(Rotation, angle, ROTATION_SPEED);
 
             // Apply forward thrust
-            ApplyCentralForce(Vector2.Right.Rotated(Rotation) * thrustAcceleration);
+            ApplyCentralForce(Vector2.Up.Rotated(Rotation) * thrustAcceleration);
         };
 
         return state;
