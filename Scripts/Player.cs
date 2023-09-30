@@ -1,5 +1,3 @@
-using System.Threading;
-
 namespace SpaceGame;
 
 public partial class Player : Ship
