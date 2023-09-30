@@ -8,7 +8,9 @@ public partial class ShipWeapon : Sprite2D
     {
         Vector2 diff = GetGlobalMousePosition() - GlobalPosition;
 
-        float angle = diff.Angle() + Mathf.Pi / 2;
+        float shipRot = GetOwner<Node2D>().Rotation;
+        float offset = Mathf.Pi / 2;
+        float angle = diff.Angle() + offset - shipRot;
 
         Rotation = Mathf.LerpAngle(Rotation, angle, rotationSpeed);
     }
