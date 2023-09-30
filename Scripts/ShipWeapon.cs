@@ -1,14 +1,15 @@
-using Godot;
-using System;
+namespace SpaceGame;
 
 public partial class ShipWeapon : Sprite2D
 {
-    // sets rotation of sprite up instead of right
-    float rotation = 90;
+    [Export] float rotationSpeed = 0.05f;
 
     public override void _PhysicsProcess(double delta)
     {
-        LookAt(GetGlobalMousePosition());
-        Rotation += (rotation * (float)delta);
+        Vector2 diff = GetGlobalMousePosition() - GlobalPosition;
+
+        float angle = diff.Angle() + Mathf.Pi / 2;
+
+        Rotation = Mathf.LerpAngle(Rotation, angle, rotationSpeed);
     }
 }

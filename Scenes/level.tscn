@@ -67,7 +67,7 @@ void vertex(){
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uxfhj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fdkms"]
 resource_local_to_scene = true
 shader = SubResource("Shader_rmbe1")
 shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
@@ -106,7 +106,6 @@ offset_bottom = 1000.0
 
 [node name="Enemy Ship" parent="." instance=ExtResource("4_hi16p")]
 position = Vector2(333, 64)
-shieldRadius = 22.24
 
 [node name="Enemy Ship 2" type="RigidBody2D" parent="."]
 position = Vector2(219, 438)
@@ -134,7 +133,7 @@ local_coords = true
 texture = ExtResource("6_gvqv4")
 
 [node name="Shield" parent="Enemy Ship 2" instance=ExtResource("7_p51sd")]
-material = SubResource("ShaderMaterial_uxfhj")
+material = SubResource("ShaderMaterial_fdkms")
 Radius = 42.98
 
 [node name="Detection" type="Area2D" parent="Enemy Ship 2"]
