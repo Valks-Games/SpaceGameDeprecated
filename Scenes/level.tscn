@@ -67,7 +67,7 @@ void vertex(){
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nu5ag"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uxfhj"]
 resource_local_to_scene = true
 shader = SubResource("Shader_rmbe1")
 shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
@@ -107,7 +107,6 @@ offset_bottom = 1000.0
 [node name="Enemy Ship" parent="." instance=ExtResource("4_hi16p")]
 position = Vector2(333, 64)
 shieldRadius = 22.24
-thrustAcceleration = 100.0
 
 [node name="Enemy Ship 2" type="RigidBody2D" parent="."]
 position = Vector2(219, 438)
@@ -120,12 +119,10 @@ maxShieldHP = 15
 maxHullHP = 10
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemy Ship 2"]
-rotation = 1.5708
 polygon = PackedVector2Array(0, -32, 15, 0, 24, 20, 20, 32, 8, 16, 0, 24, -8, 16, -20, 33, -24, 20, -16, 0)
 
 [node name="Engine Particles" type="Node2D" parent="Enemy Ship 2"]
-position = Vector2(-14, 0)
-rotation = 1.5708
+position = Vector2(0, 14)
 
 [node name="Center" type="GPUParticles2D" parent="Enemy Ship 2/Engine Particles"]
 position = Vector2(0, 10)
@@ -133,13 +130,11 @@ amount = 50
 process_material = SubResource("ParticleProcessMaterial_som6w")
 local_coords = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Enemy Ship 2"]
-rotation = 1.5708
+[node name="Ship" type="Sprite2D" parent="Enemy Ship 2"]
 texture = ExtResource("6_gvqv4")
 
 [node name="Shield" parent="Enemy Ship 2" instance=ExtResource("7_p51sd")]
-material = SubResource("ShaderMaterial_nu5ag")
-position = Vector2(-4, 0)
+material = SubResource("ShaderMaterial_uxfhj")
 Radius = 42.98
 
 [node name="Detection" type="Area2D" parent="Enemy Ship 2"]

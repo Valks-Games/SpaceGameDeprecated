@@ -14,6 +14,13 @@ public partial class AIShip : Ship
         {
             base._Ready();
             Init();
+
+            foreach (Node node in GetChildren())
+                if (node is Node2D node2D)
+                {
+                    node2D.Rotation = Mathf.Pi / 2;
+                    node2D.Position = new Vector2(-node2D.Position.Y, -node2D.Position.X);
+                }
         }
         // In-Editor
         else
