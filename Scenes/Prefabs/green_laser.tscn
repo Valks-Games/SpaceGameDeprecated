@@ -7,7 +7,6 @@
 size = Vector2(2, 8)
 
 [node name="GreenLaser" type="Sprite2D"]
-modulate = Color(0.811765, 0, 1, 1)
 z_index = -1
 texture = ExtResource("1_d2clc")
 region_enabled = true

@@ -68,7 +68,10 @@ public partial class Player : Ship
         {
             foreach (Marker2D barrel in turret.Barrels)
             {
-                SpawnProjectile(barrel.GlobalPosition, turret.GlobalRotation);
+                SpawnProjectile(
+                    barrel.GlobalPosition, 
+                    turret.GlobalRotation, 
+                    Colors.Green);
             }
         }
     }
@@ -82,14 +85,15 @@ public partial class Player : Ship
 
         foreach (Marker2D marker in hullTurretMarkers)
         {
-            SpawnProjectile(marker.GlobalPosition, Rotation);
+            SpawnProjectile(marker.GlobalPosition, Rotation, Colors.Green);
         }
     }
 
-    void SpawnProjectile(Vector2 position, float rotation)
+    void SpawnProjectile(Vector2 position, float rotation, Color color)
     {
         Projectile laser = greenLaser.Instantiate<Projectile>();
         laser.OwnerId = GetInstanceId();
+        laser.Modulate = color;
         laser.Position = position;
         laser.Rotation = rotation;
         GetTree().Root.AddChild(laser);
