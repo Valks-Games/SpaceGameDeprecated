@@ -37,7 +37,7 @@ public abstract partial class Ship : RigidBody2D
     {
         hullHP -= damage;
 
-        ParticleUtils.Spawn(Prefabs.ProjectileHit, projectilePosition, lifeTime: 3);
+        ParticleUtils.Spawn(Particles.ProjectileHit, projectilePosition, lifeTime: 5);
 
         if (hullHP <= 0)
         {
@@ -45,17 +45,17 @@ public abstract partial class Ship : RigidBody2D
             Vector2 size = shipSprite.Texture.GetSize();
             float avgSize = (size.X + size.Y) / 2;
 
-            const int   LIFETIME_WEIGHT = 20;
+            const float LIFETIME_WEIGHT = 0.15f;
             const float VELOCITY_WEIGHT = 5.0f;
             const float AMOUNT_WEIGHT   = 1.0f;
 
-            float explosionLifeTime = avgSize / LIFETIME_WEIGHT;
             int explosionAmount = (int)(avgSize * AMOUNT_WEIGHT);
+            float explosionLifeTime = avgSize * LIFETIME_WEIGHT;
             float velocity = avgSize * VELOCITY_WEIGHT;
 
             // Spawn explosion particles
             GpuParticles2D particles = 
-                ParticleUtils.Spawn(Prefabs.Explosion, Position, explosionLifeTime);
+                ParticleUtils.Spawn(Particles.Explosion, Position, explosionLifeTime);
 
             var material = particles.ProcessMaterial as ParticleProcessMaterial;
 
