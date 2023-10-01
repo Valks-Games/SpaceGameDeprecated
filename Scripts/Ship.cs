@@ -41,28 +41,7 @@ public abstract partial class Ship : RigidBody2D
 
         if (hullHP <= 0)
         {
-            // Particle properties are dynamically calculated based on ship size
-            Vector2 size = shipSprite.Texture.GetSize();
-            float avgSize = (size.X + size.Y) / 2;
-
-            const float LIFETIME_WEIGHT = 0.15f;
-            const float VELOCITY_WEIGHT = 5.0f;
-            const float AMOUNT_WEIGHT   = 1.0f;
-
-            int explosionAmount = (int)(avgSize * AMOUNT_WEIGHT);
-            float explosionLifeTime = avgSize * LIFETIME_WEIGHT;
-            float velocity = avgSize * VELOCITY_WEIGHT;
-
-            // Spawn explosion particles
-            GpuParticles2D particles = 
-                ParticleUtils.Spawn(Particles.Explosion, Position, explosionLifeTime);
-
-            var material = particles.ProcessMaterial as ParticleProcessMaterial;
-
-            material.InitialVelocityMin = velocity;
-            material.InitialVelocityMax = velocity + 50;
-
-            particles.Amount = explosionAmount;
+            SpawnExplosionParticles();
 
             // Destroy ship
             QueueFree();
@@ -86,6 +65,9 @@ public abstract partial class Ship : RigidBody2D
 
         if (shieldHP <= 0)
         {
+            GpuParticles2D particles = 
+                ParticleUtils.Spawn(Particles.ShieldBreak, Position, 0.5f);
+
             ShieldsActive = false;
             shield.Deactivate();
 
@@ -126,6 +108,32 @@ public abstract partial class Ship : RigidBody2D
             finalValue: MIN_SHIELD_INTENSITY,
             duration: 0.2
             );
+    }
+
+    void SpawnExplosionParticles()
+    {
+        // Particle properties are dynamically calculated based on ship size
+        Vector2 size = shipSprite.Texture.GetSize();
+        float avgSize = (size.X + size.Y) / 2;
+
+        const float LIFETIME_WEIGHT = 0.15f;
+        const float VELOCITY_WEIGHT = 5.0f;
+        const float AMOUNT_WEIGHT   = 1.0f;
+
+        int explosionAmount = (int)(avgSize * AMOUNT_WEIGHT);
+        float explosionLifeTime = avgSize * LIFETIME_WEIGHT;
+        float velocity = avgSize * VELOCITY_WEIGHT;
+
+        // Spawn explosion particles
+        GpuParticles2D particles =
+                ParticleUtils.Spawn(Particles.Explosion, Position, explosionLifeTime);
+
+        var material = particles.ProcessMaterial as ParticleProcessMaterial;
+
+        material.InitialVelocityMin = velocity;
+        material.InitialVelocityMax = velocity + 50;
+
+        particles.Amount = explosionAmount;
     }
 
     void InitShield()
