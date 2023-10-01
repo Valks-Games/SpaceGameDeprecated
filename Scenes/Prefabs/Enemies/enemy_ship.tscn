@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bw0p6lpwemanp"]
+[gd_scene load_steps=15 format=3 uid="uid://bw0p6lpwemanp"]
 
 [ext_resource type="Script" path="res://Scripts/AI/AIShip.cs" id="1_goopm"]
 [ext_resource type="Texture2D" uid="uid://c26b851l2s442" path="res://Sprites/enemy_ship.png" id="1_x8fuu"]
 [ext_resource type="Resource" uid="uid://b42wyojsytvbi" path="res://Resources/game_state.tres" id="2_lovay"]
 [ext_resource type="PackedScene" uid="uid://2by2t7mhuvgw" path="res://Scenes/Prefabs/Components/shield.tscn" id="3_jrcen"]
+[ext_resource type="Texture2D" uid="uid://c6sejp5ejkv1x" path="res://Sprites/player_weapon_1.png" id="5_jlqpp"]
+[ext_resource type="Script" path="res://Scripts/Turret/EnemyTurret.cs" id="6_ecxon"]
 
 [sub_resource type="Gradient" id="Gradient_gtwqj"]
 offsets = PackedFloat32Array(0, 0.480132, 0.629139)
@@ -98,3 +100,11 @@ Radius = 19.525
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
 shape = SubResource("CircleShape2D_ymv3c")
 debug_color = Color(0.701961, 0.054902, 0, 0)
+
+[node name="Rotating Turrets" type="Node2D" parent="."]
+
+[node name="1" type="Sprite2D" parent="Rotating Turrets"]
+position = Vector2(0, 5)
+texture = ExtResource("5_jlqpp")
+script = ExtResource("6_ecxon")
+gameState = ExtResource("2_lovay")

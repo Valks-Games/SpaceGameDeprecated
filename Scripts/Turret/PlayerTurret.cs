@@ -2,8 +2,5 @@ namespace SpaceGame;
 
 public partial class PlayerTurret : Turret
 {
-    public override void _PhysicsProcess(double delta)
-    {
-        RotateTowardsTarget(GetGlobalMousePosition());
-    }
+    public override Vector2 Target { get => GetGlobalMousePosition(); }
 }
