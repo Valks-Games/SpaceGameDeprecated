@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c4wt4tbr0nrrg" path="res://Sprites/player_ship.png" id="1_133p8"]
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_cnppw"]
 [ext_resource type="PackedScene" uid="uid://cj2l4pjic6ibr" path="res://Scenes/Prefabs/green_laser.tscn" id="2_4pomr"]
-[ext_resource type="PackedScene" uid="uid://dne2qghftgkgv" path="res://Scenes/Prefabs/engine_particles.tscn" id="2_xhrih"]
+[ext_resource type="PackedScene" uid="uid://dne2qghftgkgv" path="res://Scenes/Prefabs/Particles/engine_particles.tscn" id="2_xhrih"]
 [ext_resource type="Shader" path="res://Shaders/2D/ship.gdshader" id="3_qoss6"]
 [ext_resource type="Texture2D" uid="uid://c6sejp5ejkv1x" path="res://Sprites/player_weapon_1.png" id="6_7od0n"]
 [ext_resource type="PackedScene" uid="uid://2by2t7mhuvgw" path="res://Scenes/Prefabs/Components/shield.tscn" id="6_7sqt6"]
