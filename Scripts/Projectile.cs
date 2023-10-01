@@ -20,7 +20,7 @@ public partial class Projectile : Sprite2D
             {
                 if (!ship.ShieldsActive)
                 {
-                    ship.HullDamage(Damage);
+                    ship.HullDamage(Position, Damage);
                     QueueFree();
                 }
             }

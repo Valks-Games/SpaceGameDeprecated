@@ -31,11 +31,11 @@ public abstract partial class Ship : RigidBody2D
         InitShield();
     }
 
-    public void HullDamage(int damage)
+    public void HullDamage(Vector2 projectilePosition, int damage)
     {
         hullHP -= damage;
 
-        ParticleUtils.Spawn(Prefabs.ProjectileHit, Position, lifeTime: 3);
+        ParticleUtils.Spawn(Prefabs.ProjectileHit, projectilePosition, lifeTime: 3);
 
         if (hullHP <= 0)
         {
