@@ -68,7 +68,7 @@ void vertex(){
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cxo2k"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_olbjd"]
 resource_local_to_scene = true
 shader = SubResource("Shader_rmbe1")
 shader_parameter/color = Color(0, 1, 0.952941, 0.156863)
@@ -79,12 +79,6 @@ shader_parameter/intensity = null
 radius = 200.0
 
 [node name="Level" type="Node2D"]
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 666.0
-offset_top = 226.0
-offset_right = 706.0
-offset_bottom = 266.0
 
 [node name="Player Ship" parent="." groups=["Player"] instance=ExtResource("1_wawxp")]
 position = Vector2(554, 361)
@@ -133,7 +127,7 @@ local_coords = true
 texture = ExtResource("6_gvqv4")
 
 [node name="Shield" parent="Enemy Ship 2" instance=ExtResource("7_p51sd")]
-material = SubResource("ShaderMaterial_cxo2k")
+material = SubResource("ShaderMaterial_olbjd")
 Radius = 42.98
 
 [node name="Detection" type="Area2D" parent="Enemy Ship 2"]
