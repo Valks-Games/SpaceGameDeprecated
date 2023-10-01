@@ -4,7 +4,8 @@ public abstract partial class Ship : RigidBody2D
 {
     [Export] int maxShieldHP = 3;
     [Export] int maxHullHP = 3;
-    [Export] double shieldRegenDelay = 3;
+    [Export] double fullShieldRegenDelay = 3;
+    [Export] double passiveShieldRegenDelay = 2;
     [Export] protected float thrustAcceleration = 100;
     [Export] protected float rotateAcceleration = 0.1f;
     [Export] bool enginesEmittingOnReady;
@@ -19,6 +20,8 @@ public abstract partial class Ship : RigidBody2D
     GTween tweenShield;
     Sprite2D shipSprite;
 
+    double passiveShieldRegenDelayCounter;
+
     int shieldHP;
     int hullHP;
 
@@ -31,6 +34,11 @@ public abstract partial class Ship : RigidBody2D
         InitEngineParticles();
         InitHullTurrets();
         InitShield();
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        PassiveShieldRegeneration(delta);
     }
 
     public void HullDamage(Vector2 projectilePosition, int damage)
@@ -76,11 +84,27 @@ public abstract partial class Ship : RigidBody2D
                 ShieldsActive = true;
                 shield.Activate();
                 shieldHP = maxShieldHP;
-            })).SetDelay(shieldRegenDelay);
+            })).SetDelay(fullShieldRegenDelay);
         }
         else
         {
             AnimateShield();
+        }
+    }
+
+    void PassiveShieldRegeneration(double delta)
+    {
+        passiveShieldRegenDelayCounter += delta;
+
+        if (passiveShieldRegenDelayCounter >= passiveShieldRegenDelay)
+        {
+            passiveShieldRegenDelayCounter = 0;
+
+            // Regen shield HP if shield is active and less than max shield HP
+            if (ShieldsActive && shieldHP < maxShieldHP)
+            {
+                shieldHP++;
+            }
         }
     }
 

@@ -24,6 +24,7 @@ public partial class AIShip : Ship
 
     public override void _PhysicsProcess(double delta)
     {
+        base._PhysicsProcess(delta);
         curState.Update();
     }
 

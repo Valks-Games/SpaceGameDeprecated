@@ -21,6 +21,8 @@ public partial class Player : Ship
 
     public override void _PhysicsProcess(double delta)
     {
+        base._PhysicsProcess(delta);
+
         if (Input.IsActionPressed("shoot_hull_turrets"))
         {
             ShootHullTurrets();
