@@ -17,6 +17,7 @@ public abstract partial class Ship : RigidBody2D
     ShaderMaterial shieldMaterial;
     Shield shield;
     GTween tweenShield;
+    Sprite2D shipSprite;
 
     int shieldHP;
     int hullHP;
@@ -25,6 +26,7 @@ public abstract partial class Ship : RigidBody2D
     {
         shieldHP = maxShieldHP;
         hullHP = maxHullHP;
+        shipSprite = GetNode<Sprite2D>("Ship");
 
         InitEngineParticles();
         InitHullTurrets();
@@ -39,8 +41,28 @@ public abstract partial class Ship : RigidBody2D
 
         if (hullHP <= 0)
         {
+            // Particle properties are dynamically calculated based on ship size
+            Vector2 size = shipSprite.Texture.GetSize();
+            float avgSize = (size.X + size.Y) / 2;
+
+            const int   LIFETIME_WEIGHT = 20;
+            const float VELOCITY_WEIGHT = 5.0f;
+            const float AMOUNT_WEIGHT   = 1.0f;
+
+            float explosionLifeTime = avgSize / LIFETIME_WEIGHT;
+            int explosionAmount = (int)(avgSize * AMOUNT_WEIGHT);
+            float velocity = avgSize * VELOCITY_WEIGHT;
+
             // Spawn explosion particles
-            ParticleUtils.Spawn(Prefabs.Explosion, Position, lifeTime: 3);
+            GpuParticles2D particles = 
+                ParticleUtils.Spawn(Prefabs.Explosion, Position, explosionLifeTime);
+
+            var material = particles.ProcessMaterial as ParticleProcessMaterial;
+
+            material.InitialVelocityMin = velocity;
+            material.InitialVelocityMax = velocity + 50;
+
+            particles.Amount = explosionAmount;
 
             // Destroy ship
             QueueFree();

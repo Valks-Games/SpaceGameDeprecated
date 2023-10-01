@@ -9,15 +9,19 @@ public partial class ParticleUtils : Node
         instance = this;
     }
 
-    public static void Spawn(PackedScene prefab, Vector2 pos, double lifeTime)
+    public static GpuParticles2D Spawn(PackedScene prefab, Vector2 pos, double lifeTime)
     {
         GpuParticles2D particles = prefab.Instantiate<GpuParticles2D>();
         instance.GetTree().Root.AddChild(particles);
+
         particles.Position = pos;
         particles.Emitting = true;
+        particles.Lifetime = lifeTime;
         particles.CreateTween().TweenCallback(Callable.From(() =>
         {
             particles.QueueFree();
         })).SetDelay(lifeTime);
+
+        return particles;
     }
 }
