@@ -10,7 +10,7 @@ size = Vector2(2, 8)
 z_index = -1
 texture = ExtResource("1_d2clc")
 region_enabled = true
-region_rect = Rect2(7.26834, 38.9188, 14.459, 19.1885)
+region_rect = Rect2(4.853, 36.039, 19.394, 24.933)
 script = ExtResource("1_iqrap")
 
 [node name="Area2D" type="Area2D" parent="."]
